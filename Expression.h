@@ -9,7 +9,7 @@ using namespace std;
 #include <map>
 
 /**
- * Expression - responsebable for ecpression
+ * Expression - responsebale for ecpression
  * Represent an expression
  * Methods that associate for every expression that exist .
  */
@@ -20,7 +20,7 @@ public:
      */
     virtual double calculate(map<double, Var *> symbolTable);
 
-    virtual Expression assign()
+    virtual Expression assign();
 
 };
 
