@@ -3,4 +3,4 @@ project(progect)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(progect main.cpp Expression.cpp Expression.h Var.cpp Var.h Number.cpp Number.h Plus.cpp Plus.h Pow.cpp Pow.h Mult.cpp Mult.h Minus.cpp Minus.h Div.cpp Div.h)
+add_executable(progect main.cpp Expression.cpp Expression.h Var.cpp Var.h Number.cpp Number.h Plus.cpp Plus.h Pow.cpp Pow.h Mult.cpp Mult.h Minus.cpp Minus.h Div.cpp Div.h command.cpp command.h)
