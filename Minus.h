@@ -9,9 +9,8 @@
 
 class Minus : public BinaryExpression{
 public:
-    Minus(Expression *leftExp, Expression *rightExp);
-
     double calculate(map<string,double> symbolTable) override;
 
+    Minus(Expression *leftExp, Expression *rightExp);
 };
 #endif //PROGECT_MINUS_H

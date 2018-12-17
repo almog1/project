@@ -10,7 +10,6 @@
 class Div : public BinaryExpression{
 public:
     Div(Expression *leftExp, Expression *rightExp);
-
     double calculate(map<string,double> symbolTable) override;
 };
 

@@ -8,19 +8,14 @@
 #include "Expression.h"
 
 class BinaryExpression : public Expression {
-private:
+protected:
     Expression *leftExp;
     Expression *rightExp;
 public:
     BinaryExpression(Expression *leftExp, Expression *rightExp);
 
     Expression *getLeftExp() const;
-
-    void setLeftExp(Expression *leftExp);
-
     Expression *getRightExp() const;
-
-    void setRightExp(Expression *rightExp);
 
     /* Evaluate the expression using the variable values provided and return the result .
      */

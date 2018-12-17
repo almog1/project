@@ -9,9 +9,8 @@
 
 class Plus : public BinaryExpression {
 public:
-    double calculate(map<string,double> symbolTable) override;
+    double calculate(map<string, double> symbolTable) override;
 
-public:
     Plus(Expression *leftExp, Expression *rightExp);
 };
 
