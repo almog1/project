@@ -18,10 +18,9 @@ public:
 
     /* Evaluate the expression using the variable values provided and return the result .
      */
-    virtual double calculate(map<double, Var *> symbolTable);
+    virtual double calculate(map<double, Var *> symbolTable) = 0;
 
-    virtual Expression assign();
-
+    virtual double assign();
 };
 
 
