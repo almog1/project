@@ -6,6 +6,13 @@
 #include "Parser.h"
 #include "Expression.h"
 #include "expressionDetect.h"
+#include "OtherFunctions.h"
+
+OpenDataServer::OpenDataServer() {
+    //initilize the values
+    this->port = 0;
+    this->hz = 0;
+}
 
 int OpenDataServer::getPort() const {
     return port;
@@ -30,19 +37,18 @@ void OpenDataServer::setHz(int hz) {
  */
 int OpenDataServer::doCommand(vector<string> data) {
     //take the first and second
-    Parser prs;
     //put spaces in the port string
-    // todo change the parser to just function
-    string portStr = prs.putSpaces(data[1]);
-    Expression* portExp = evaluate(portStr);
+    string portStr = putSpaces(data[1]);
+    Expression *portExp = evaluate(portStr);
     this->port = (int) (portExp->calculate(this->symbolTable));
 
-    string hzStr = prs.putSpaces(data[2]);
-    Expression* hzExp = evaluate(hzStr);
+    string hzStr = putSpaces(data[2]);
+    Expression *hzExp = evaluate(hzStr);
     this->hz = (int) (hzExp->calculate(this->symbolTable));
 
 
     //todo need to Open The Server
 
-    return 2;
+    //read the command name and two arguments
+    return 3;
 }

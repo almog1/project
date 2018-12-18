@@ -48,14 +48,3 @@ void Parser::parser(vector<string> data) {
 }
 
 
-string Parser::putSpaces(string str) {
-    int i = 0;
-    string newStr = "";
-    newStr = str[0];
-
-    //run on all the string and add spaces
-    for (i = 1; i < str.length(); i++) {
-        newStr = newStr + " " + str[i];
-    }
-    return newStr;
-}

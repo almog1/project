@@ -4,6 +4,7 @@
 #include "expressionDetect.h"
 #include "Reader.h"
 #include "Parser.h"
+#include "OtherFunctions.h"
 
 using namespace std;
 
@@ -32,8 +33,7 @@ int main() {
     }
     cout << "\n" << endl;
 
-    Parser prs;
-    string changed = prs.putSpaces(lines[31]);
+    string changed = putSpaces(lines[31]);
     Expression* exp3 = evaluate(changed);
     cout << exp3->calculate(symbolTebla) << endl;
     return 0;

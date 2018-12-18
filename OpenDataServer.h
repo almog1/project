@@ -13,6 +13,8 @@ class OpenDataServer : public Command {
 public:
     OpenDataServer();
 
+    OpenDataServer();
+
     int doCommand(vector<string> data) override;
 
     int getPort() const;

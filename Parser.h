@@ -17,7 +17,6 @@ class Parser {
 public:
     Parser();
     void parser(vector<string> data);
-    string putSpaces(string str);
 };
 
 #endif //PROGECT_PARSER_H
