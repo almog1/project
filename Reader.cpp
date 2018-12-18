@@ -43,7 +43,11 @@ vector<string> Lexer(string fileName) {
                             isInOp = false;
                         }
                         if (lastOp) {
-                            data[data.size() - 1] = data[data.size() - 1] + segment;
+                            if(isInOp == true){
+                                data[data.size() - 1] = data[data.size() - 1] + segment;
+                            }else{
+                                data.push_back(segment);
+                            }
                             isInOp = true;
                         }
                     }
