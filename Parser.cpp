@@ -4,10 +4,20 @@
 
 #include <iostream>
 #include "Parser.h"
+#include "OpenDataServer.h"
+#include "VarCommand.h"
+#include "ConnectCommand.h"
 
 #define OPEN_DATA_SERVER "openDataServer"
 #define CONNECT "connect"
 #define VAR "var"
+
+
+Parser::Parser() {
+    this->commandTable.insert(pair<string, Command *>(OPEN_DATA_SERVER, new OpenDataServer());
+    this->commandTable.insert(pair<string, Command *>(CONNECT, new ConnectCommand()));
+    this->commandTable.insert(pair<string, Command *>(VAR, new VarCommand()));
+}
 
 void Parser::parser(vector<string> data) {
     //check the data
@@ -36,6 +46,7 @@ void Parser::parser(vector<string> data) {
 
     }
 }
+
 
 string Parser::putSpaces(string str) {
     int i = 0;

@@ -13,8 +13,9 @@
 using namespace std;
 
 class Parser {
-   // map<string, Command *> commandTable;
+    map<string, Command *> commandTable;
 public:
+    Parser();
     void parser(vector<string> data);
     string putSpaces(string str);
 };
