@@ -17,7 +17,8 @@ int main() {
     Expression *exp = new Div(new Var("x"), new Var("y"));
     cout << exp->calculate(symbolTebla) << endl;
 
-    string str = "6 * ( 2 + 10 )";
+ //   string str = "6 * ( 2 + 10 )";
+    string str = "2 * ( 3 + 9 ) / 12 + 4";
     Expression *exp2 = evaluate(str);
     cout << exp2->calculate(symbolTebla) << endl;
 
