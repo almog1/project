@@ -9,7 +9,10 @@
 
 class VarCommand : public Command {
 public:
-    int doCommand(vector<string> data,int index) override;
+    int setParameters(vector<string> data, int index) override;
+
+    void doCommand() override;
+
 };
 
 #endif //PROGECT_VARCOMMAND_H

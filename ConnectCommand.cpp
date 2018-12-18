@@ -8,18 +8,6 @@
 #include "expressionDetect.h"
 #include "OtherFunctions.h"
 
-int ConnectCommand::doCommand(vector<string>data , int index) {
-    this->ip = data[index+1];
-    string portStr = putSpaces(data[index+2]);
-    Expression *portExp = evaluate(portStr);
-    this->port = (int) (portExp->calculate(this->symbolTable));
-
-    //todo connect by IP
-
-    //read connect command name and two arguments
-    return 3;
-}
-
 const string &ConnectCommand::getIp() const {
     return ip;
 }
@@ -40,4 +28,18 @@ ConnectCommand::ConnectCommand() {
     //initilize the values
     this->port = 0;
     this->ip = "";
+}
+
+void ConnectCommand::doCommand() {
+    //todo connect by ip
+}
+
+int ConnectCommand::setParameters(vector<string> data, int index) {
+    this->ip = data[index + 1];
+    string portStr = putSpaces(data[index + 2]);
+    Expression *portExp = evaluate(portStr);
+    this->port = (int) (portExp->calculate(this->symbolTable));
+
+    //read connect command name and two arguments
+    return 3;
 }

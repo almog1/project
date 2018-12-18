@@ -6,6 +6,7 @@
 #define PROGECT_PARSER_H
 
 #include "Command.h"
+#include "Expression.h"
 #include <map>
 #include <string>
 #include <vector>
@@ -13,7 +14,7 @@
 using namespace std;
 
 class Parser {
-    map<string, Command *> commandTable;
+    map<string, Expression*> commandTable;
 public:
     Parser();
     void parser(vector<string> data);

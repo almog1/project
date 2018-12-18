@@ -35,19 +35,23 @@ void OpenDataServer::setHz(int hz) {
  * @param data .vector to read the values from it
  * @return how much arguments been readed
  */
-int OpenDataServer::doCommand(vector<string> data,int index) {
+
+
+void OpenDataServer::doCommand() {
+    //todo need to Open The Server
+}
+
+int OpenDataServer::setParameters(vector<string> data, int index) {
     //take the first and second
     //put spaces in the port string
-    string portStr = putSpaces(data[index+1]);
+    string portStr = putSpaces(data[index + 1]);
     Expression *portExp = evaluate(portStr);
     this->port = (int) (portExp->calculate(this->symbolTable));
 
-    string hzStr = putSpaces(data[index+2]);
+    string hzStr = putSpaces(data[index + 2]);
     Expression *hzExp = evaluate(hzStr);
     this->hz = (int) (hzExp->calculate(this->symbolTable));
 
-
-    //todo need to Open The Server
 
     //read the command name and two arguments
     return 3;

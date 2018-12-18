@@ -7,6 +7,7 @@
 #include "OpenDataServer.h"
 #include "VarCommand.h"
 #include "ConnectCommand.h"
+#include "CommandExpression.h"
 
 #define OPEN_DATA_SERVER "openDataServer"
 #define CONNECT "connect"
@@ -14,9 +15,10 @@
 
 
 Parser::Parser() {
-    this->commandTable.insert(pair<string, Command *>(OPEN_DATA_SERVER, new OpenDataServer()));
-    this->commandTable.insert(pair<string, Command *>(CONNECT, new ConnectCommand()));
-    this->commandTable.insert(pair<string, Command *>(VAR, new VarCommand()));
+    this->commandTable.insert(
+            pair<string, Expression *>(OPEN_DATA_SERVER, new CommandExpression(new OpenDataServer())));
+    this->commandTable.insert(pair<string, Expression *>(CONNECT, new CommandExpression(new ConnectCommand())));
+    this->commandTable.insert(pair<string, Expression *>(VAR, new CommandExpression(new VarCommand())));
 }
 
 void Parser::parser(vector<string> data) {
@@ -24,12 +26,13 @@ void Parser::parser(vector<string> data) {
     vector<string>::iterator it;
     int index = 0;
 
-    while (index<data.size()){
+    while (index < data.size()) {
         //vector not empty
-        if (data.empty() == false){
-
-            Command *c = (this->commandTable.find(data[index]))->second;
-            index += c->doCommand(data, index);
+        if (data.empty() == false) {
+            //todo - downcast!!!!!
+            CommandExpression *dataCommand = dynamic_cast<CommandExpression *>((this->commandTable.find(
+                    data[index]))->second);
+            index += dataCommand->getCommand()->setParameters(data, index);
 
             //todo need to check if everything entered
         }

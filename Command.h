@@ -20,7 +20,11 @@ public:
         symbolTable.insert(pair<string, double>("y", 4));
     }
 
-    virtual int doCommand(vector<string> , int index) = 0;
+    const map<string, double> getSymbolTable() const;
+
+    virtual int setParameters(vector<string> data, int index) = 0;
+
+    virtual void doCommand() = 0;
 };
 
 #endif //PROGECT_COMMAND_H

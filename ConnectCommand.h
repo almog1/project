@@ -13,13 +13,15 @@ class ConnectCommand : public Command {
 public:
     ConnectCommand();
 
-    int doCommand(vector<string> data,int index) override;
-
     const string &getIp() const;
 
     void setIp(const string &ip);
 
     int getPort() const;
+
+    int setParameters(vector<string> data, int index) override;
+
+    void doCommand() override;
 
     void setPort(int port);
 };
