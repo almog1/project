@@ -8,9 +8,9 @@
 #include "expressionDetect.h"
 #include "OtherFunctions.h"
 
-int ConnectCommand::doCommand(vector<string> data) {
-    this->ip = data[4];
-    string portStr = putSpaces(data[5]);
+int ConnectCommand::doCommand(vector<string>data , int index) {
+    this->ip = data[index+1];
+    string portStr = putSpaces(data[index+2]);
     Expression *portExp = evaluate(portStr);
     this->port = (int) (portExp->calculate(this->symbolTable));
 

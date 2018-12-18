@@ -14,7 +14,7 @@
 
 
 Parser::Parser() {
-    this->commandTable.insert(pair<string, Command *>(OPEN_DATA_SERVER, new OpenDataServer());
+    this->commandTable.insert(pair<string, Command *>(OPEN_DATA_SERVER, new OpenDataServer()));
     this->commandTable.insert(pair<string, Command *>(CONNECT, new ConnectCommand()));
     this->commandTable.insert(pair<string, Command *>(VAR, new VarCommand()));
 }
@@ -22,28 +22,17 @@ Parser::Parser() {
 void Parser::parser(vector<string> data) {
     //check the data
     vector<string>::iterator it;
+    int index = 0;
 
-    //vector not empty
-    if (data.empty() == false) {
-        it = data.begin();
-        if (*it == OPEN_DATA_SERVER) {
-            ++it;
-            while (it != data.end() && (*it) != CONNECT) {
+    while (index<data.size()){
+        //vector not empty
+        if (data.empty() == false){
 
-            }
-        } else {
-            throw "first argument isn't openDataServer";
+            Command *c = (this->commandTable.find(data[index]))->second;
+            index += c->doCommand(data, index);
+
+            //todo need to check if everything entered
         }
-    }
-
-
-    //run on the data in the data vector - check it
-    for (it = data.begin(); it != data.end(); ++it) {
-        //need to see the open data server
-        if (*it == OPEN_DATA_SERVER) {
-
-        }
-
     }
 }
 

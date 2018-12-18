@@ -13,7 +13,7 @@ class ConnectCommand : public Command {
 public:
     ConnectCommand();
 
-    int doCommand(vector<string> data) override;
+    int doCommand(vector<string> data,int index) override;
 
     const string &getIp() const;
 

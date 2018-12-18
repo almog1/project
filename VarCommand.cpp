@@ -3,3 +3,11 @@
 //
 
 #include "VarCommand.h"
+
+int VarCommand::doCommand(vector<string> data,int index) {
+
+
+
+
+    return 5;
+}

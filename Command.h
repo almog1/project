@@ -20,7 +20,7 @@ public:
         symbolTable.insert(pair<string, double>("y", 4));
     }
 
-    virtual int doCommand(vector<string> data) = 0;
+    virtual int doCommand(vector<string> , int index) = 0;
 };
 
 #endif //PROGECT_COMMAND_H

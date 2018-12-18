@@ -8,7 +8,8 @@
 #include "Command.h"
 
 class VarCommand : public Command {
-
+public:
+    int doCommand(vector<string> data,int index) override;
 };
 
 #endif //PROGECT_VARCOMMAND_H
