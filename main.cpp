@@ -2,6 +2,7 @@
 
 #include "ExpressionHeaders.h"
 #include "expressionDetect.h"
+#include "Reader.h"
 
 using namespace std;
 
@@ -17,7 +18,14 @@ int main() {
     cout << exp->calculate(symbolTebla) << endl;
 
     string str = "6 * ( 2 + 10 )";
-    Expression* exp2=evaluate(str);
+    Expression *exp2 = evaluate(str);
     cout << exp2->calculate(symbolTebla) << endl;
+
+    vector<string> lines;
+    lines = Lexer("/home/almogg/Documents/ProjcetStep1/test.txt");
+
+    for (vector<string>::iterator it = lines.begin(); it != lines.end(); ++it) {
+        cout << "\n" << *it;
+    }
     return 0;
 }
