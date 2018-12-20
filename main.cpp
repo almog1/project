@@ -33,8 +33,9 @@ int main() {
     }
     cout << "\n" << endl;
 
-   // string changed = putSpaces(lines[31]);
-    //Expression* exp3 = evaluate(changed);
-  //  cout << exp3->calculate(symbolTebla) << endl;
+   // string changed = putSpaces(lines[6]);
+    string changed = "( 5 - 2 ) * ( -3 ) + 5";
+    Expression* exp3 = evaluate(changed);
+    cout << exp3->calculate(symbolTebla) << endl;
     return 0;
 }
