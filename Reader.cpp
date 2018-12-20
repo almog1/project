@@ -64,9 +64,12 @@ vector<string> Lexer(string fileName) {
                             }
                             isInOp = true;
                         } else {
-                            if (last == ')' || first == ')') {
+                            if (first == ')'){
                                 data[data.size() - 1] = data[data.size() - 1] + segment;
-                            } else {
+                            }//else if(last == ')') {
+                                //nothing to do - regular
+                            //}
+                            else {
                                 if (isInOp == true) {
                                     data[data.size() - 1] = data[data.size() - 1] + segment;
                                 } else {
