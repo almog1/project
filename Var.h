@@ -1,6 +1,3 @@
-//
-// Created by almogg on 12/17/18.
-//
 
 #ifndef PROGECT_VAR_H
 #define PROGECT_VAR_H
@@ -11,7 +8,8 @@
 using namespace std;
 
 /**
- * For the variables
+ * Var Class -
+ * present a variables
  */
 class Var : public Expression {
 private:

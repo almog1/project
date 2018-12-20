@@ -1,11 +1,20 @@
-//
-// Created by almogg on 12/17/18.
-//
 
 #include "Number.h"
 
+/**
+ *
+ * @param value a double variable
+ * build a new Number
+ */
+Number::Number(double value) : value(value) {}
+
+/**
+ *
+ * @param symbolTable a table that consist all the variables in the map
+ * @return the value of the number
+ */
 double Number::calculate(map<string, double> symbolTable) {
     return this->value;
 }
 
-Number::Number(double value) : value(value) {}
+

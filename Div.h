@@ -7,9 +7,25 @@
 
 #include "BinaryExpression.h"
 
+/**
+ * Div Class -
+ * present the expression of 'div'
+ */
 class Div : public BinaryExpression{
 public:
+    /**
+     *
+     * @param leftExp the left expression
+     * @param rightExp the right expression
+     * build a div expression with right and left side
+     */
     Div(Expression *leftExp, Expression *rightExp);
+
+    /**
+     *
+     * @param symbolTable the table that contains all the variables
+     * @return the calclation of the div expression
+     */
     double calculate(map<string,double> symbolTable) override;
 };
 

@@ -1,12 +1,3 @@
-//
-// Created by almogg on 12/17/18.
-//
-
-#include "Var.h"
-
-//
-// Created by almogg on 12/16/18.
-//
 
 #include "Var.h"
 
