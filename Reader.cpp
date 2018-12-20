@@ -25,57 +25,59 @@ vector<string> Lexer(string fileName) {
             while (getline(temp, segment, ' ')) {
                 last = segment[segment.length() - 1];
                 first = segment[0];
-                //check if its operator - need to take the next one too
-                if (last == '+' || last == '-' || last == '/' || last == '*') {
-                    lastOp = true;
-                }
-                if (first == '+' || first == '-' || first == '/' || first == '*') {
-                    firstOp = true;
-                }
-                if (firstOp == true || lastOp == true) {
-                    //if just this char
-                    if (segment.length() == 1 || (firstOp && lastOp)) {
-                        isInOp = true;
-                        data[data.size() - 1] = data[data.size() - 1] + segment;
-                    } else {
-                        if (firstOp) {
-                            data[data.size() - 1] = data[data.size() - 1] + segment;
-                            isInOp = false;
-                        }
-                        if (lastOp) {
-                            if(isInOp == true){
-                                data[data.size() - 1] = data[data.size() - 1] + segment;
-                            }else{
-                                data.push_back(segment);
-                            }
-                            isInOp = true;
-                        }
+                if (segment != "") {
+                    //check if its operator - need to take the next one too
+                    if (last == '+' || last == '-' || last == '/' || last == '*') {
+                        lastOp = true;
                     }
-                } else {
-                    //check if end "("
-                    if (last == '(') {
-                        if (isInOp == true) {
+                    if (first == '+' || first == '-' || first == '/' || first == '*') {
+                        firstOp = true;
+                    }
+                    if (firstOp == true || lastOp == true) {
+                        //if just this char
+                        if (segment.length() == 1 || (firstOp && lastOp)) {
+                            isInOp = true;
                             data[data.size() - 1] = data[data.size() - 1] + segment;
                         } else {
-                            data.push_back(segment);
+                            if (firstOp) {
+                                data[data.size() - 1] = data[data.size() - 1] + segment;
+                                isInOp = false;
+                            }
+                            if (lastOp) {
+                                if (isInOp == true) {
+                                    data[data.size() - 1] = data[data.size() - 1] + segment;
+                                } else {
+                                    data.push_back(segment);
+                                }
+                                isInOp = true;
+                            }
                         }
-                        isInOp = true;
                     } else {
-                        if (last == ')' || first == ')') {
-                            data[data.size() - 1] = data[data.size() - 1] + segment;
-                        } else {
+                        //check if end "("
+                        if (last == '(') {
                             if (isInOp == true) {
                                 data[data.size() - 1] = data[data.size() - 1] + segment;
                             } else {
                                 data.push_back(segment);
                             }
+                            isInOp = true;
+                        } else {
+                            if (last == ')' || first == ')') {
+                                data[data.size() - 1] = data[data.size() - 1] + segment;
+                            } else {
+                                if (isInOp == true) {
+                                    data[data.size() - 1] = data[data.size() - 1] + segment;
+                                } else {
+                                    data.push_back(segment);
+                                }
+                            }
+                            isInOp = false;
                         }
-                        isInOp = false;
                     }
+                    firstOp = false;
+                    lastOp = false;
+                    //oldSegmaent = segment;
                 }
-                firstOp = false;
-                lastOp = false;
-                //oldSegmaent = segment;
             }
         }
         ifs.close();
