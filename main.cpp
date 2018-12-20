@@ -27,15 +27,15 @@ int main() {
 
     vector<string> lines;
     //lines = Lexer("/home/almogg/Documents/ProjcetStep1/test.txt");
-    lines = Lexer("/home/chagit/Documents/ProjcetStep1/test.txt");
+    lines = Lexer("/home/chagit/Documents/progectStep1/test1.txt");
 
     for (vector<string>::iterator it = lines.begin(); it != lines.end(); ++it) {
         cout << "\n" << *it;
     }
     cout << "\n" << endl;
 
-   // string changed = putSpaces(lines[31]);
-    //Expression* exp3 = evaluate(changed);
-  //  cout << exp3->calculate(symbolTebla) << endl;
+    string changed = putSpaces(lines[0]);
+    Expression* exp3 = evaluate(changed);
+    cout << exp3->calculate(symbolTebla) << endl;
     return 0;
 }

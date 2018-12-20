@@ -36,12 +36,12 @@ void OpenDataServer::setHz(int hz) {
 void OpenDataServer::doCommand() {
     //todo need to Open The Server
 
-    struct MyParams* params = new MyParams();
-    params->port = this->port;
-    params->hz = this->hz;
-
-    pthread_t id;
-    pthread_create(&id, nullptr, ServerSocket::openSocket, params);
+//    struct MyParams* params = new MyParams();
+//    params->port = this->port;
+//    params->hz = this->hz;
+//
+//    pthread_t id;
+//    pthread_create(&id, nullptr, ServerSocket::openSocket, params);
 
 
 }
