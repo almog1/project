@@ -26,7 +26,8 @@ int main() {
     cout << exp2->calculate(symbolTebla) << endl;
 
     vector<string> lines;
-    lines = Lexer("/home/almogg/Documents/ProjcetStep1/test.txt");
+    //lines = Lexer("/home/almogg/Documents/ProjcetStep1/test.txt");
+    lines = Lexer("/home/chagit/Documents/ProjcetStep1/test.txt");
 
     for (vector<string>::iterator it = lines.begin(); it != lines.end(); ++it) {
         cout << "\n" << *it;

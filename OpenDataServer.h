@@ -12,8 +12,10 @@ class OpenDataServer : public Command {
     // the port we are gonna to connect
     int port;
 
-    //num of miiseconds we are gonna to read the information from the client
+    //num of miliseconds we are gonna to read the information from the client
     int hz;
+
+    //
 public:
     /**
      * a defult constructor
@@ -40,6 +42,12 @@ public:
     int getHz() const;
 
     void setHz(int hz);
+
+    struct MyParams {
+        int port;
+        int hz;
+        vector <string>data;
+    };
 };
 
 #endif //PROGECT_OPENDATASERVER_H
