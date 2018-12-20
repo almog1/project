@@ -24,16 +24,21 @@ void ConnectCommand::setPort(int port) {
     ConnectCommand::port = port;
 }
 
+/**
+ * a defult constructor
+ */
 ConnectCommand::ConnectCommand() {
     //initilize the values
     this->port = 0;
     this->ip = "";
 }
 
-void ConnectCommand::doCommand() {
-    //todo connect by ip
-}
-
+/**
+ *
+ * @param data a vector witch contains all the words from the script (command and values - expression)
+ * @param index - points on a place in the data vector
+ * @return how much we need to move on the array (the num of values for a specific command)
+ */
 int ConnectCommand::setParameters(vector<string> data, int index) {
     this->ip = data[index + 1];
     string portStr = putSpaces(data[index + 2]);
@@ -42,4 +47,11 @@ int ConnectCommand::setParameters(vector<string> data, int index) {
 
     //read connect command name and two arguments
     return 3;
+}
+
+/**
+ * run the command
+ */
+void ConnectCommand::doCommand() {
+    //todo connect by ip
 }

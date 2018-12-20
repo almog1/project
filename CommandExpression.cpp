@@ -1,16 +1,27 @@
-//
-// Created by almogg on 12/18/18.
-//
 
 #include "CommandExpression.h"
 
+/**
+ *
+ * @param symbolTable the table that contains all the variables in the program
+ * @return the calculation of the expression
+ */
 double CommandExpression::calculate(map<string, double> symbolTable) {
     this->command->doCommand();
     //todo need to return double
 }
 
+/**
+ *
+ * @param command s command
+ * constructor
+ */
 CommandExpression::CommandExpression(Command *command) : command(command) {}
 
+/**
+ *
+ * @return the command
+ */
 Command *CommandExpression::getCommand() const {
     return command;
 }

@@ -1,6 +1,3 @@
-//
-// Created by almogg on 12/18/18.
-//
 
 #ifndef PROGECT_READER_H
 #define PROGECT_READER_H
@@ -14,11 +11,22 @@
 using namespace std;
 
 /**
- * Read the information .
+ * Read the information
  */
 
-    vector<string> Lexer(string fileName);
+/**
+ *
+ * @param fileName the file name that contains all the data the user enters
+ * @return a vaector that contains all the words in the file (command and expression)
+ */
+vector<string> Lexer(string fileName);
 
-    vector<string> Split(string line, char divide);
+/**
+ * Split the line by char .
+ * @param line . string the line to split
+ * @param divide . char to split by it
+ * @return vector after been splitted
+ */
+vector<string> Split(string line, char divide);
 
 #endif //PROGECT_READER_H

@@ -1,6 +1,3 @@
-//
-// Created by almogg on 12/18/18.
-//
 
 #include "OpenDataServer.h"
 #include "Parser.h"
@@ -8,6 +5,9 @@
 #include "expressionDetect.h"
 #include "OtherFunctions.h"
 
+/**
+ * a defult constructor
+ */
 OpenDataServer::OpenDataServer() {
     //initilize the values
     this->port = 0;
@@ -31,16 +31,18 @@ void OpenDataServer::setHz(int hz) {
 }
 
 /**
- * Do the command by the values in the data .
- * @param data .vector to read the values from it
- * @return how much arguments been readed
+ * run the command
  */
-
-
 void OpenDataServer::doCommand() {
     //todo need to Open The Server
 }
 
+/**
+ *
+ * @param data a vector witch contains all the words from the script (command and values - expression)
+ * @param index - points on a place in the data vector
+ * @return how much we need to move on the array (the num of values for a specific command)
+ */
 int OpenDataServer::setParameters(vector<string> data, int index) {
     //take the first and second
     //put spaces in the port string
@@ -51,7 +53,6 @@ int OpenDataServer::setParameters(vector<string> data, int index) {
     string hzStr = putSpaces(data[index + 2]);
     Expression *hzExp = evaluate(hzStr);
     this->hz = (int) (hzExp->calculate(this->symbolTable));
-
 
     //read the command name and two arguments
     return 3;

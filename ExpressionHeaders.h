@@ -2,6 +2,9 @@
 #ifndef PROGECT_EXPRESSIONHEADERS_H
 #define PROGECT_EXPRESSIONHEADERS_H
 
+/**
+ * contains all the expression headers in the program
+ */
 #include "Minus.h"
 #include "Expression.h"
 #include "Plus.h"
