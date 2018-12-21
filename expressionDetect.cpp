@@ -39,6 +39,8 @@ Expression *evaluate(string tokens) {
     // stack to store operators.
     stack<char> ops;
 
+    bool neg = false;
+
     for (i = 0; i < tokens.length(); i++) {
 
         // Current token is a whitespace,
@@ -50,6 +52,9 @@ Expression *evaluate(string tokens) {
             // brace, push it to 'ops'
         else if (tokens[i] == '(') {
             ops.push(tokens[i]);
+        } else if (tokens[i] == '-') {
+            neg = true;
+            continue;
         }
 
             // Current token is a number, push
@@ -69,13 +74,25 @@ Expression *evaluate(string tokens) {
                     if (isDouble) {
                         dobleVal = dobleVal / 10;
                     }
-                    val = (val * 10) + (tokens[i] - '0');
+                    if (neg) {
+                        val = (-1) * ((val * 10) + (tokens[i] - '0'));
+                        neg = false;
+                    } else
+                        val = (val * 10) + (tokens[i] - '0');
                 }
                 i++;
-
             }
             val = val * dobleVal;
             values.push(new Number(val));
+        } else if ((!isdigit(tokens[i])) && (tokens[i] != ')') && (tokens[i] != '+')
+                   && (tokens[i] != '-') && (tokens[i] != '*') && (tokens[i] != '/')) {
+
+            string val = "";
+            while (tokens[i] != ' ') {
+                val = val + tokens[i];
+                i++;
+            }
+            values.push(new Var(val));
         }
 
             // Closing brace encountered, solve
@@ -142,3 +159,4 @@ Expression *evaluate(string tokens) {
     // Top of 'values' contains result, return it.
     return values.top();
 }
+

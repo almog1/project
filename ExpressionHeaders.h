@@ -13,7 +13,9 @@
 #include "Number.h"
 #include "Var.h"
 #include "BinaryExpression.h"
+#include "UnaryExpression.h"
 #include "Div.h"
+#include "Neg.h"
 
 
 #endif //PROGECT_EXPRESSIONHEADERS_H

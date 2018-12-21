@@ -12,11 +12,14 @@ string putSpaces(string str) {
     //run on all the string and add spaces
     for (i = 1; i < str.length(); i++) {
         if (!isdigit(str[i]) && (str[i] != '.')) {
-            // if (str[i] == '-' || str[i] == ')' || str[i] == '(' || str[i] == '+' || str[i] == '*' || str[i] == '/') {
-            newStr = newStr + " " + str[i] + " ";
+            if (str[i] == '-' || str[i] == ')' || str[i] == '(' || str[i] == '+' || str[i] == '*' || str[i] == '/') {
+                newStr = newStr + " " + str[i] + " ";
+            } else //it is a letter
+                newStr = newStr + str[i];
         } else {
             newStr = newStr + str[i];
         }
+
     }
-    return newStr;
+    return newStr + ' ';
 }
