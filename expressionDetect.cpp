@@ -28,7 +28,6 @@ int precedence(char op) {
     return 0;
 }
 
-//shuting yard algorithem
 // Function that returns value of
 // expression after evaluation.
 Expression *evaluate(string tokens) {
@@ -56,16 +55,26 @@ Expression *evaluate(string tokens) {
             // Current token is a number, push
             // it to stack for numbers.
         else if (isdigit(tokens[i])) {
-            int val = 0;
-
+            double val = 0;
+            double dobleVal = 1;
+            bool isDouble = false;
             // There may be more than one
             // digits in number.
             while (i < tokens.length() &&
-                   isdigit(tokens[i])) {
-                val = (val * 10) + (tokens[i] - '0');
+                   (isdigit(tokens[i]) || tokens[i] == '.')) {
+                //check if it double numebr
+                if (tokens[i] == '.') {
+                    isDouble = true;
+                } else {
+                    if (isDouble) {
+                        dobleVal = dobleVal / 10;
+                    }
+                    val = (val * 10) + (tokens[i] - '0');
+                }
                 i++;
-            }
 
+            }
+            val = val * dobleVal;
             values.push(new Number(val));
         }
 
