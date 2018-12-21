@@ -22,12 +22,14 @@ vector<string> Lexer(string fileName) {
             string segment;
             string oldSegmaent;
             char last, first;
-            bool lastOp = false, firstOp = false;
+            bool lastOp = false, firstOp = false, lastIsDigit = false;
             //split by " "
             while (getline(temp, segment, ' ')) {
                 last = segment[segment.length() - 1];
                 first = segment[0];
                 if (segment != "") {
+                    //check if the last one was digit - for the '-'
+
                     //check if its operator - need to take the next one too
                     if (last == '+' || last == '-' || last == '/' || last == '*') {
                         lastOp = true;
@@ -39,10 +41,21 @@ vector<string> Lexer(string fileName) {
                         //if just this char
                         if (segment.length() == 1 || (firstOp && lastOp)) {
                             isInOp = true;
-                            data[data.size() - 1] = data[data.size() - 1] + segment;
+                            //check if it - and last wasn't digit
+                            if (first == '-' && !lastIsDigit) {
+                                //need new place in the vector - not a continue of reg
+                                data.push_back(segment);
+                            } else {
+                                data[data.size() - 1] = data[data.size() - 1] + segment;
+                            }
                         } else {
                             if (firstOp) {
-                                data[data.size() - 1] = data[data.size() - 1] + segment;
+                                if (first == '-' && !lastIsDigit) {
+                                    //need new place in the vector - not a continue of reg
+                                    data.push_back(segment);
+                                } else {
+                                    data[data.size() - 1] = data[data.size() - 1] + segment;
+                                }
                                 isInOp = false;
                             }
                             if (lastOp) {
@@ -64,9 +77,12 @@ vector<string> Lexer(string fileName) {
                             }
                             isInOp = true;
                         } else {
-                            if (last == ')' || first == ')') {
+                            if (first == ')') {
                                 data[data.size() - 1] = data[data.size() - 1] + segment;
-                            } else {
+                            }//else if(last == ')') {
+                                //nothing to do - regular
+                                //}
+                            else {
                                 if (isInOp == true) {
                                     data[data.size() - 1] = data[data.size() - 1] + segment;
                                 } else {
@@ -76,9 +92,17 @@ vector<string> Lexer(string fileName) {
                             isInOp = false;
                         }
                     }
+
+                    //oldSegmaent = segment;
+
+                    //check last one - if digit or op - ok - can be before '-'
+                    if (isdigit(last) || lastOp || last == '(' || last == ')') {
+                        lastIsDigit = true;
+                    } else {
+                        lastIsDigit = false;
+                    }
                     firstOp = false;
                     lastOp = false;
-                    //oldSegmaent = segment;
                 }
             }
         }
