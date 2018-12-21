@@ -1,4 +1,5 @@
 
+#include <regex>
 #include "Reader.h"
 
 /**
@@ -16,13 +17,32 @@ vector<string> Lexer(string fileName) {
     if (ifs.is_open()) {
         //take a string of line
         while (getline(ifs, line)) {
+            //if match \t - replace by " "
+            regex reg("\t");
+            //change every match to space
+            line = regex_replace(line, reg, " ");
             //add the line to the vector
             stringstream temp(line);
             //create from the line
             string segment;
             string oldSegmaent;
+            string fixedLine = "";
             char last, first;
             bool lastOp = false, firstOp = false, lastIsDigit = false;
+            //check if there is '=' in the line
+        /*    for(int i=0;i<line.length();i++){
+                //check if '='
+                if(line[i] == '='){
+                    //need to check before and after it
+                    if(line[i-1]){
+
+                    }else{
+
+                    }
+                }else{
+                    fixedLine = fixedLine + line[i];
+                }
+            }*/
             //split by " "
             while (getline(temp, segment, ' ')) {
                 last = segment[segment.length() - 1];
