@@ -20,9 +20,8 @@ int main() {
     //cout << exp->calculate(symbolTebla) << endl;
 
     //   string str = "6 * ( 2 + 10 )";
-    string str = "2+(- 4*3)";
+    string str = "-7*5";
     str = putSpaces(str);
-    //string str = "5";
     Expression *exp2 = evaluate(str);
     cout << exp2->calculate(symbolTebla) << endl;
 

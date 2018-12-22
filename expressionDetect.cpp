@@ -52,7 +52,7 @@ Expression *evaluate(string tokens) {
             // brace, push it to 'ops'
         else if (tokens[i] == '(') {
             ops.push(tokens[i]);
-        } else if (tokens[i] == '-') {
+        } else if ((tokens[i] == '-') && (!(isdigit(tokens[i-2])))) {
             neg = true;
             continue;
         }
