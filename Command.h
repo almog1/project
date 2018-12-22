@@ -16,6 +16,9 @@ class Command {
 protected:
     //contains a map of all the string vars and their values in the program
     map<string, double> symbolTable;
+    //connection between var name and path
+    map<string, string> varPathTable;
+    // todo - maybe need to intilize the map for the beggining
 public:
     /**
      * constructor - build a new command
