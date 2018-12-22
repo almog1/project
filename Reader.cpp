@@ -69,6 +69,9 @@ vector<string> Lexer(string fileName) {
             string segment;
             string oldSegmaent;
             string fixedLine = "";
+            bool isEqualInLine = false;
+            bool latIsEqual = true;
+
             char last, first;
             bool lastOp = false, firstOp = false, lastIsDigit = false;
 
@@ -90,20 +93,39 @@ vector<string> Lexer(string fileName) {
                         //if just this char
                         if (segment.length() == 1 || (firstOp && lastOp)) {
                             isInOp = true;
-                            //check if it - and last wasn't digit
-                            if (first == '-' && !lastIsDigit) {
+                            //check if it - and there is '=' isn't in this line
+                            if (first == '-' && !isEqualInLine) {
+                                //check if last is digit
+                                if(lastIsDigit){
+                                    data[data.size() - 1] = data[data.size() - 1] + segment;
+                                } else{
                                 //need new place in the vector - not a continue of reg
-                                data.push_back(segment);
+                                data.push_back(segment);}
                             } else {
-                                data[data.size() - 1] = data[data.size() - 1] + segment;
+                                //here if equal in line - need to check if last one is '='
+                                if (latIsEqual) {
+                                    data.push_back(segment);
+                                    latIsEqual = false;
+                                } else {
+                                    data[data.size() - 1] = data[data.size() - 1] + segment;
+                                }
                             }
                         } else {
                             if (firstOp) {
-                                if (first == '-' && !lastIsDigit) {
-                                    //need new place in the vector - not a continue of reg
-                                    data.push_back(segment);
+                                if (first == '-' && !isEqualInLine) {
+                                    //check if last is digit
+                                    if(lastIsDigit){
+                                        data[data.size() - 1] = data[data.size() - 1] + segment;
+                                    } else{
+                                        //need new place in the vector - not a continue of reg
+                                        data.push_back(segment);}
                                 } else {
-                                    data[data.size() - 1] = data[data.size() - 1] + segment;
+                                    if (latIsEqual) {
+                                        data.push_back(segment);
+                                        latIsEqual = false;
+                                    } else {
+                                        data[data.size() - 1] = data[data.size() - 1] + segment;
+                                    }
                                 }
                                 isInOp = false;
                             }
@@ -144,6 +166,16 @@ vector<string> Lexer(string fileName) {
 
                     //oldSegmaent = segment;
 
+                    //check last one - if = need to know there is in the line
+                    if (first == '=' || last == '=' || segment == "while" || segment == "if") {
+                        isEqualInLine = true;
+                    }
+                    //if the last one is = - put a flag
+                    if (last == '=') {
+                        latIsEqual = true;
+                    } else {
+                        latIsEqual = false;
+                    }
                     //check last one - if digit or op - ok - can be before '-'
                     if (isdigit(last) || lastOp || last == '(' || last == ')') {
                         lastIsDigit = true;
@@ -154,6 +186,7 @@ vector<string> Lexer(string fileName) {
                     lastOp = false;
                 }
             }
+            isEqualInLine = false;
         }
         ifs.close();
     }
