@@ -1,4 +1,5 @@
 
+#include <regex>
 #include "Reader.h"
 
 /**
@@ -16,13 +17,61 @@ vector<string> Lexer(string fileName) {
     if (ifs.is_open()) {
         //take a string of line
         while (getline(ifs, line)) {
+            //if match \t - replace by " "
+            regex reg("\t");
+            //change every match to space
+            line = regex_replace(line, reg, " ");
             //add the line to the vector
+            int i = 0;
+            string lineSplitEq = "";
+            bool isBeforeCond = false;
+            for (i = 0; i < line.length(); i++) {
+                //check if '='
+                if (line[i] == '=') {
+                    //check if before was <>!=
+                    if (isBeforeCond) {
+                        //put space after it
+                        lineSplitEq = lineSplitEq + line[i] + " ";
+                        isBeforeCond = false;
+                    } else if ((i + 1) < line.length() && line[i + 1] == '=') {
+                        //just need to put flag
+                        isBeforeCond = true;
+                        lineSplitEq = lineSplitEq + " " + line[i];
+                    } else {
+                        lineSplitEq = lineSplitEq + " " + line[i] + " ";
+                    }
+                } else if (line[i] == '<' || line[i] == '>' || line[i] == '!') {
+                    isBeforeCond = true;
+                    //need to put space before it
+                    lineSplitEq = lineSplitEq + " " + line[i];
+                } else if (line[i] == '{' || line[i] == '}') {
+                    lineSplitEq = lineSplitEq + " " + line[i] + " ";
+                } else {
+                    //check if was condition before
+                    if (isBeforeCond) {
+                        lineSplitEq = lineSplitEq + " " + line[i];
+                        isBeforeCond = false;
+                    } else {
+                        lineSplitEq = lineSplitEq + line[i];
+                    }
+                }
+            }
+
+            //take the new line
+            line = lineSplitEq;
+
+            //need to put space before and after '='
+            //regex regEq ("(([<>=])=((?![=<>])))");
+            //  line = regex_replace(line,regEq," = ");
+
             stringstream temp(line);
             //create from the line
             string segment;
             string oldSegmaent;
+            string fixedLine = "";
             char last, first;
             bool lastOp = false, firstOp = false, lastIsDigit = false;
+
             //split by " "
             while (getline(temp, segment, ' ')) {
                 last = segment[segment.length() - 1];
