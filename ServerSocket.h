@@ -22,7 +22,7 @@ using namespace std;
  */
 class ServerSocket {
 public:
-    void *openSocket(void *arg);
+    static void *openSocket(void *arg);
 
 
 
