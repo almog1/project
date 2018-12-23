@@ -35,15 +35,10 @@ void OpenDataServer::setHz(int hz) {
  */
 void OpenDataServer::doCommand() {
     //todo need to Open The Server
+    struct MyParams *params = new MyParams();
 
-//    struct MyParams* params = new MyParams();
-//    params->port = this->port;
-//    params->hz = this->hz;
-//
-//    pthread_t id;
-//    pthread_create(&id, nullptr, ServerSocket::openSocket, params);
-
-
+    pthread_t id;
+    pthread_create(&id, nullptr, ServerSocket::openSocket, params);
 }
 
 /**
@@ -66,3 +61,8 @@ int OpenDataServer::setParameters(vector<string> data, int index) {
     //read the command name and two arguments
     return 3;
 }
+//
+//void *OpenDataServer::openTreadServer(void *param) {
+//    ServerSocket *dataReaderServer;
+//    dataReaderServer = static_cast<MyParams*>(param).
+//}

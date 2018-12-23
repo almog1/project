@@ -3,6 +3,8 @@
 #define PROGECT_OPENDATASERVER_H
 
 #include "Command.h"
+#include "ServerSocket.h"
+
 
 /**
  * OpenDataServer Class
@@ -43,10 +45,11 @@ public:
 
     void setHz(int hz);
 
+    void *openTreadServer(void *param);
+
     struct MyParams {
-        int port;
-        int hz;
-        vector <string>data;
+        int port = this->port;
+        int hz = this->hz;
     };
 };
 
