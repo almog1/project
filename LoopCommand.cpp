@@ -3,9 +3,11 @@
 //
 
 #include "LoopCommand.h"
-
+#include "CommandTable.h"
 
 int LoopCommand::setParameters(vector<string> data, int index) {
+    CommandTable* commadTab = CommandTable::getInstance();
+    map<string, Expression*> commandTable = commadTab->getTable();
     //check what is the condition
 
     int newIndex = 4;

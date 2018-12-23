@@ -14,7 +14,7 @@ int VarCommand::setParameters(vector<string> data, int index) {
     int newIndex = 0;
     string varName = "";
     //check if first is Var
-    if (data[index] == "Var") {
+    if (data[index] == "var") {
         //get the vector when index is on the string "var"
         //make share size is more then 4
         if ((index + 4) > data.size()) {

@@ -1,6 +1,7 @@
 
 #include <regex>
 #include "Reader.h"
+#include "SymbolTable.h"
 
 /**
  *
@@ -8,6 +9,10 @@
  * @return a vaector that contains all the words in the file (command and expression)
  */
 vector<string> Lexer(string fileName) {
+  //  SymbolTable *s = SymbolTable::getInstance();
+  //  map<string,double > symbols = s->getSymbolTable();
+   // s->addValue("z",10);
+
     vector<string> data;
     bool isInOp = false;
     //read rhe information from the file
