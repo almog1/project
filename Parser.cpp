@@ -20,11 +20,11 @@
 
 
 Parser::Parser() {
-    this->commandTable.insert(
-            pair<string, Expression *>(OPEN_DATA_SERVER, new CommandExpression(new OpenDataServer())));
-    this->commandTable.insert(pair<string, Expression *>(CONNECT, new CommandExpression(new ConnectCommand())));
-    this->commandTable.insert(pair<string, Expression *>(VAR, new CommandExpression(new VarCommand())));
-    this->commandTable.insert(pair<string, Expression*>(WHILE, new CommandExpression(new LoopCommand())));
+ //   this->commandTable.insert(
+   //         pair<string, Expression *>(OPEN_DATA_SERVER, new CommandExpression(new OpenDataServer())));
+   // this->commandTable.insert(pair<string, Expression *>(CONNECT, new CommandExpression(new ConnectCommand())));
+   // this->commandTable.insert(pair<string, Expression *>(VAR, new CommandExpression(new VarCommand())));
+   // this->commandTable.insert(pair<string, Expression*>(WHILE, new CommandExpression(new LoopCommand())));
 }
 
 void Parser::parser(vector<string> data) {
@@ -32,8 +32,8 @@ void Parser::parser(vector<string> data) {
     vector<string>::iterator it;
     int index = 0;
 
-   // CommandTable *commandTab = CommandTable::getInstance();
- //   this->commandTable = commandTab->getTable();
+    CommandTable *commandTab = CommandTable::getInstance();
+    this->commandTable = commandTab->getTable();
 
     while (index < data.size()) {
         //vector not empty
