@@ -45,11 +45,11 @@ public:
 
     void setHz(int hz);
 
-    void *openTreadServer(void *param);
+    void *openServer_thread_callback(void *params);
 
     struct MyParams {
-        int port = this->port;
-        int hz = this->hz;
+        int port;
+        int hz;
     };
 };
 

@@ -2,10 +2,16 @@
 // Created by chagit on 12/22/18.
 //
 
+#include <iostream>
 #include "ServerSocket.h"
 
 
 using namespace std;
+
+struct MyParams {
+    int port;
+    int hz;
+};
 
 void *ServerSocket::openSocket(void *arg) {
     vector<string> vars;
@@ -62,6 +68,7 @@ void *ServerSocket::openSocket(void *arg) {
     while (true) {
         n = read(newsockfd, buffer, 1024);
         string b = buffer;
+        cout << buffer << endl;
         if (n < 0) {
             perror("ERROR reading from socket");
             exit(1);
@@ -77,10 +84,10 @@ void *ServerSocket::openSocket(void *arg) {
         line.push_back(b.substr(0, pos));
 
         //update the map with the values from the simulator
-        Command *c;
-        vector<string, double> data = c->getSymbolTable();
-        for (int i = 0; i < line.size(); ++i) {
-            data.find[vars[i]].setValue(stod(line[i]));
-        }
+//        Command *c;
+//        vector<string, double> data = c->getSymbolTable();
+//        for (int i = 0; i < line.size(); ++i) {
+//            data.find[vars[i]].setValue(stod(line[i]));
+//        }
     }
 }
