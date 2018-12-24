@@ -115,3 +115,15 @@ void SymbolTable::setValuesInSymbolTable() {
     }
     //it->first << " => " << it->second << '\n';
 }
+
+string SymbolTable::getVarPath(string varName) {
+    map<string, string>::iterator it;
+    string varPath = "";
+
+    it = this->varPathTable.find(varName);
+
+    if (it != this->varPathTable.end()) {
+        //if exist - return its value - the path
+        varPath = it->second; //the real path
+    }
+}
