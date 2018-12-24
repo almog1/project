@@ -10,6 +10,7 @@
 #include "CommandExpression.h"
 #include "LoopCommand.h"
 #include "CommandTable.h"
+#include "SymbolTable.h"
 
 #define OPEN_DATA_SERVER "openDataServer"
 #define CONNECT "connect"
@@ -28,6 +29,8 @@ Parser::Parser() {
 }
 
 void Parser::parser(vector<string> data) {
+    SymbolTable * symbolTab = SymbolTable::getInstance();
+
     //check the data
     vector<string>::iterator it;
     int index = 0;
@@ -54,7 +57,7 @@ void Parser::parser(vector<string> data) {
             }
             index += dataCommand->getCommand()->setParameters(data, index);
 
-            dataCommand->calculate(dataCommand->getCommand()->getSymbolTable());
+            dataCommand->calculate(*symbolTab->getSymbolTable());
 
             //todo need to check if everything entered
         }

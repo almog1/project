@@ -8,6 +8,7 @@
 #include "expressionDetect.h"
 #include "OtherFunctions.h"
 #include "ClientSocket.h"
+#include "SymbolTable.h"
 
 const string &ConnectCommand::getIp() const {
     return ip;
@@ -41,10 +42,12 @@ ConnectCommand::ConnectCommand() {
  * @return how much we need to move on the array (the num of values for a specific command)
  */
 int ConnectCommand::setParameters(vector<string> data, int index) {
+    SymbolTable * symbolTab = SymbolTable::getInstance();
+
     this->ip = data[index + 1];
     string portStr = putSpaces(data[index + 2]);
     Expression *portExp = evaluate(portStr);
-    this->port = (int) (portExp->calculate(this->symbolTable));
+    this->port = (int) (portExp->calculate(*symbolTab->getSymbolTable()));
 
     //read connect command name and two arguments
     return 3;

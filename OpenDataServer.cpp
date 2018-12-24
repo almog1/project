@@ -4,6 +4,7 @@
 #include "Expression.h"
 #include "expressionDetect.h"
 #include "OtherFunctions.h"
+#include "SymbolTable.h"
 
 /**
  * a defult constructor
@@ -49,15 +50,17 @@ void OpenDataServer::doCommand() {
  * @return how much we need to move on the array (the num of values for a specific command)
  */
 int OpenDataServer::setParameters(vector<string> data, int index) {
+    SymbolTable * symbolTab = SymbolTable::getInstance();
+
     //take the first and second
     //put spaces in the port string
     string portStr = putSpaces(data[index + 1]);
     Expression *portExp = evaluate(portStr);
-    this->port = (int) (portExp->calculate(this->symbolTable));
+    this->port = (int) (portExp->calculate(*symbolTab->getSymbolTable()));
 
     string hzStr = putSpaces(data[index + 2]);
     Expression *hzExp = evaluate(hzStr);
-    this->hz = (int) (hzExp->calculate(this->symbolTable));
+    this->hz = (int) (hzExp->calculate(*symbolTab->getSymbolTable()));
 
     //read the command name and two arguments
     return 3;

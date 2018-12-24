@@ -15,9 +15,9 @@ using namespace std;
 class Command {
 protected:
     //contains a map of all the string vars and their values in the program
-    map<string, double> symbolTable;
+   // map<string, double> symbolTable;
     //connection between var name and path
-    map<string, string> varPathTable;
+    //map<string, string> varPathTable;
     // todo - maybe need to intilize the map for the beggining
 public:
     /**
@@ -25,15 +25,15 @@ public:
      */
     Command() {
         //todo change it
-        symbolTable.insert(pair<string, double>("x", 2));
-        symbolTable.insert(pair<string, double>("y", 4));
+      //  symbolTable.insert(pair<string, double>("x", 2));
+       // symbolTable.insert(pair<string, double>("y", 4));
     }
 
     /**
      *
      * @return the table with all the variables
      */
-    const map<string, double> getSymbolTable() const;
+//    const map<string, double> getSymbolTable() const;
 
     /**
      *

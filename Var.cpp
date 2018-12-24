@@ -1,5 +1,6 @@
 
 #include "Var.h"
+#include "SymbolTable.h"
 
 const string &Var::getName() const {
     return this->name;
@@ -26,6 +27,7 @@ void Var::setValue(double value) {
 }
 
 double Var::calculate(map<string,double> symbolTable) {
+    //SymbolTable *symbolTable = SymbolTable::getInstance();
     return symbolTable.at(this->name);
 }
 

@@ -5,12 +5,16 @@
 #include "VarCommand.h"
 #include "OtherFunctions.h"
 #include "Expression.h"
+#include "SymbolTable.h"
 
 VarCommand::VarCommand() {
     //todo - check if need to set something in the constructor
 }
 
 int VarCommand::setParameters(vector<string> data, int index) {
+    SymbolTable * symbolTab = SymbolTable::getInstance();
+
+
     int newIndex = 0;
     string varName = "";
     //check if first is Var
@@ -37,8 +41,11 @@ int VarCommand::setParameters(vector<string> data, int index) {
                 throw "Not Enoght Args!";
             }
             varPath = data[index + 4];
+
             //insert the var name with its path
-            this->varPathTable.insert(pair<string, string>(varName, varPath));
+            symbolTab->addPathToVar(varName,varPath);
+
+           // this->varPathTable.insert(pair<string, string>(varName, varPath));
             newIndex = 5;
             //todo - check if need with or without the ""
         } else {
@@ -47,13 +54,14 @@ int VarCommand::setParameters(vector<string> data, int index) {
             //if it can be an expression
             string val = putSpaces(data[index + 3]);
             Expression *valExp = evaluate(val);
-            value = valExp->calculate(this->symbolTable);
+
+            value = valExp->calculate(*symbolTab->getSymbolTable());
 
             //if it will be just name of var - it will take it from the map and return its value there
             //need to put its value in string value
             // value = this->symbolTable.at(data[index + 3]);
 
-            this->symbolTable.insert(pair<string, double>(varName, value));
+            symbolTab->addSymbolValue(varName,value);
             newIndex = 4;
         }
     } else {
@@ -71,9 +79,10 @@ int VarCommand::setParameters(vector<string> data, int index) {
         //if it can be an expression
         string val = putSpaces(data[index + 2]);
         Expression *valExp = evaluate(val);
-        value = valExp->calculate(this->symbolTable);
+        value = valExp->calculate(*symbolTab->getSymbolTable());
         //take the expression value
-        this->symbolTable.insert(pair<string, double>(varName, value));
+
+        symbolTab->addSymbolValue(varName,value);
         newIndex = 3;
     }
     //todo - make sure need to return 5 and not 4

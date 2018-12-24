@@ -7,6 +7,7 @@
 
 #include <map>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -17,12 +18,22 @@ private:
     SymbolTable();
 
     map<string, double> symbolTable;
+    map<string, string> varPathTable;
+    map<string, double > pathDouble;
+    vector<string> names;
+
 public:
     static SymbolTable *getInstance();
 
-    void addValue(string varName, double value);
+    void addSymbolValue(string varName, double value);
+
+    void addPathToVar(string varName, string path);
+
+    void addValueByPathIndex(int index, double val);
 
     map<string,double > *getSymbolTable();
+
+
 };
 
 #endif //PROGECT_SYMBOLTABLE_H

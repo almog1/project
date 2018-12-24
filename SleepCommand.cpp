@@ -3,6 +3,7 @@
 //
 
 #include "SleepCommand.h"
+#include "SymbolTable.h"
 
 //todo check if we need to do something
 SleepCommand::SleepCommand() {
@@ -16,11 +17,13 @@ SleepCommand::SleepCommand() {
  * @return the num of steps we wend in the data vector
  */
 int SleepCommand::setParameters(vector<string> data, int index) {
+    SymbolTable * symbolTab = SymbolTable::getInstance();
+
     //take the first and second
     //put spaces in the sleep string
     string sleepStr = putSpaces(data[index + 1]);
     Expression *sleepExp = evaluate(sleepStr);
-    this->sleepTime = (int) (sleepExp->calculate(this->symbolTable));
+    this->sleepTime = (int) (sleepExp->calculate(*symbolTab->getSymbolTable()));
 
     //read the command name and the var of it - num of time for sleeping
     return 2;
