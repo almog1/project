@@ -96,5 +96,17 @@ bool IfCommand::checkIfCondition() {
         } else {
             return false;
         }
+    } else if (this->condition == "<") {
+        if (leftVal < rightVal) {
+            return true;
+        } else {
+            return false;
+        }
+    } else if (this->condition == ">") {
+        if (leftVal > rightVal) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
