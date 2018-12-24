@@ -33,6 +33,7 @@ public:
 
     double getValue(string varName);
 
+    void setValuesInSymbolTable();
    // map<string,double > *getSymbolTable();
 
 
