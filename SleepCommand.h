@@ -27,14 +27,14 @@ public:
 
     /**
      *
-     * @param data
-     * @param index
-     * @return
+     * @param data the vector that contains
+     * @param index the index where the data exist
+     * @return the num of steps we wend in the data vector
      */
     int setParameters(vector<string> data, int index) override;
 
     /**
-     * run the sleep command
+     * runs the sleep command
      */
     void doCommand() override;
 

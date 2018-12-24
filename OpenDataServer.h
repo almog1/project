@@ -45,8 +45,6 @@ public:
 
     void setHz(int hz);
 
-    void *openServer_thread_callback(void *params);
-
     struct MyParams {
         int port;
         int hz;

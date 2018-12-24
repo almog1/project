@@ -7,6 +7,7 @@
 #include "Parser.h"
 #include "expressionDetect.h"
 #include "OtherFunctions.h"
+#include "ClientSocket.h"
 
 const string &ConnectCommand::getIp() const {
     return ip;
@@ -50,8 +51,13 @@ int ConnectCommand::setParameters(vector<string> data, int index) {
 }
 
 /**
- * run the command
+ * run the connect command
  */
 void ConnectCommand::doCommand() {
-    //todo connect by ip
+    struct MyParams *params = new MyParams();
+    params->port = this->port;
+    params->ip = this->ip;
+
+    pthread_t id;
+    pthread_create(&id, nullptr, ClientSocket::openSocket, params);
 }

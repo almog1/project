@@ -33,6 +33,11 @@ public:
     void doCommand() override;
 
     void setPort(int port);
+
+    struct MyParams {
+        string ip;
+        int port;
+    };
 };
 
 #endif //PROGECT_CONNECTCOMMAND_H

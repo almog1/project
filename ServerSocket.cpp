@@ -83,7 +83,9 @@ void *ServerSocket::openSocket(void *arg) {
         }
         line.push_back(b.substr(0, pos));
 
+        //todo update the map
         //update the map with the values from the simulator
+
 //        Command *c;
 //        vector<string, double> data = c->getSymbolTable();
 //        for (int i = 0; i < line.size(); ++i) {
