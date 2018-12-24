@@ -9,12 +9,16 @@
 #include "CommandExpression.h"
 #include "LoopCommand.h"
 #include "PrintCommand.h"
+#include "SleepCommand.h"
+#include "IfCommand.h"
 
 #define OPEN_DATA_SERVER "openDataServer"
 #define CONNECT "connect"
 #define VAR "var"
 #define WHILE "while"
 #define PRINT "print"
+#define SLEEP "sleep"
+#define IF "if"
 #define EXIT "exit"
 
 CommandTable *CommandTable::instance = nullptr;
@@ -26,6 +30,8 @@ CommandTable::CommandTable() {
     this->commandTable.insert(pair<string, Expression *>(VAR, new CommandExpression(new VarCommand())));
     this->commandTable.insert(pair<string, Expression *>(WHILE, new CommandExpression(new LoopCommand())));
     this->commandTable.insert(pair<string, Expression *>(PRINT, new CommandExpression(new PrintCommand())));
+    this->commandTable.insert(pair<string, Expression *>(SLEEP, new CommandExpression(new SleepCommand())));
+    this->commandTable.insert(pair<string, Expression *>(IF, new CommandExpression(new IfCommand())));
 }
 
 void CommandTable::addValue(string commandName, Expression *exp) {

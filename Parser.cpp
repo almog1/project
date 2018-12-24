@@ -32,7 +32,7 @@ void Parser::parser(vector<string> data) {
     SymbolTable * symbolTab = SymbolTable::getInstance();
 
     //check the data
-    vector<string>::iterator it;
+    //vector<string>::iterator it;
     int index = 0;
 
     CommandTable *commandTab = CommandTable::getInstance();

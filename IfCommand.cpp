@@ -1,20 +1,14 @@
 //
-// Created by almogg on 12/22/18.
+// Created by almogg on 12/24/18.
 //
 
-#include "LoopCommand.h"
+#include "IfCommand.h"
 #include "CommandTable.h"
 #include "OtherFunctions.h"
-//#include "CommandTable.h"
+#include "expressionDetect.h"
 
-int LoopCommand::setParameters(vector<string> data, int index) {
-//    CommandTable* commadTab = CommandTable::getInstance();
-    //  map<string, Expression*> commandTable = commadTab->getTable();
-    //check what is the condition
-
+int IfCommand::setParameters(vector<string> data, int index) {
     int newIndex = 5;
-    //todo - make sure enough arguments
-    //date[index] = while
     string leftCondition = putSpaces(data[index + 1]);
     this->leftExp = evaluate(leftCondition); //just make the expression and save it to member
 
@@ -25,35 +19,31 @@ int LoopCommand::setParameters(vector<string> data, int index) {
     this->condition = data[index + 2];
 
     //create the loop command - create the vector of commands
-    newIndex = this->createLoop(data, newIndex);
+    newIndex = this->createCommands(data, newIndex);
 
     //take the expression value
     return newIndex;
 }
 
-void LoopCommand::doCommand() {
-    //check condition
-    //as long as the condition is true - run on all the commands in the loop
-    while (this->checkCondition()) {
+void IfCommand::doCommand() {
+    //do command just if condition true
+    if (this->checkIfCondition()) {
         int i = 0;
+        //do all the commands in the vector
         for (int i = 0; i < this->commands.size(); i++) {
             this->commands[i]->calculate(); //do the command
         }
     }
 }
 
-int LoopCommand::createLoop(vector<string> data, int index) {
+int IfCommand::createCommands(vector<string> data, int index) {
     CommandTable *commandTab = CommandTable::getInstance();
     map<string, Expression *> commandTable = commandTab->getTable();
 
-    //check its not the end of the loop
-    //and data isn't over
+    //check its not the end of the if condition
     while (index < data.size() && data[index] != "}") {
         //add command to the command vector
-        //this->commands.insert()
-
         map<string, Expression *>::iterator it;
-
         //need to find the command
         it = commandTable.find(data[index]);
         CommandExpression *dataCommand;
@@ -66,9 +56,8 @@ int LoopCommand::createLoop(vector<string> data, int index) {
             dataCommand = dynamic_cast<CommandExpression *>(commandTable.find("var")->second);
         }
         index += dataCommand->getCommand()->setParameters(data, index);
-
         //add the command to the vector of commands
-        commands.push_back(dataCommand);
+        this->commands.push_back(dataCommand);
     }
     //check if this is the '}'
     if (data[index] == "}") {
@@ -77,7 +66,7 @@ int LoopCommand::createLoop(vector<string> data, int index) {
     return index;
 }
 
-bool LoopCommand::checkCondition() {
+bool IfCommand::checkIfCondition() {
     double leftVal = this->leftExp->calculate();
     double rightVal = this->rightExp->calculate();
 
@@ -109,4 +98,3 @@ bool LoopCommand::checkCondition() {
         }
     }
 }
-//bool checkCondition()
