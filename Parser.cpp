@@ -39,8 +39,19 @@ void Parser::parser(vector<string> data) {
         //vector not empty
         if (data.empty() == false) {
             //todo - downcast!!!!!
-            CommandExpression *dataCommand = dynamic_cast<CommandExpression *>((this->commandTable.find(
-                    data[index]))->second);
+            map<string, Expression*>::iterator it;
+
+            //need to find the command
+            it = this->commandTable.find(data[index]);
+            CommandExpression *dataCommand;
+            //check if exist
+            if(it != this->commandTable.end()){
+                 dataCommand = dynamic_cast<CommandExpression *>(it->second);
+            }else{
+                //its a var name
+                //need to go to the VarCommand
+                dataCommand = dynamic_cast<CommandExpression *>(this->commandTable.find(VAR)->second);
+            }
             index += dataCommand->getCommand()->setParameters(data, index);
 
             dataCommand->calculate(dataCommand->getCommand()->getSymbolTable());
