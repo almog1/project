@@ -17,17 +17,13 @@ int main() {
     symbolTebla.insert(pair<string, double>("avi", 2));
     symbolTebla.insert(pair<string, double>("moshe", 4));
 
-    Expression *expression = new Expression("-5");
+    OpenDataServer *dataServer = new OpenDataServer();
+    dataServer->setPort(5400);
+    dataServer->setHz(10);
+    dataServer->doCommand();
+    while (true){
 
-    cout << expression->calculate(symbolTebla) <<endl;
-
-//    OpenDataServer *dataServer = new OpenDataServer();
-//    dataServer->setPort(5400);
-//    dataServer->setHz(10);
-//    dataServer->doCommand();
-//    while (true){
-//
-//    }
+    }
 
     return 0;
 }
