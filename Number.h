@@ -24,7 +24,7 @@ public:
      * @param symbolTable a table that consist all the variables in the map
      * @return the value of the number
      */
-    double calculate(map<string, double> symbolTable) override;
+    double calculate() override;
 };
 
 #endif //PROGECT_NUMBER_H

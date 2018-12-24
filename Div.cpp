@@ -14,6 +14,6 @@ Div::Div(Expression *leftExp, Expression *rightExp) : BinaryExpression(leftExp, 
  * @param symbolTable the table that contains all the variables
  * @return the calclation of the div expression
  */
-double Div::calculate(map<string,double> symbolTable) {
-    return (this->getLeftExp()->calculate(symbolTable) / this->getRightExp()->calculate(symbolTable));
+double Div::calculate() {
+    return (this->getLeftExp()->calculate() / this->getRightExp()->calculate());
 }

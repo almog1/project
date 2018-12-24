@@ -6,8 +6,8 @@
  * @param symbolTable the table that contains all the variables
  * @return the calclation of the minus expression
  */
-double Minus::calculate(map<string, double> symbolTable) {
-    return (this->getLeftExp()->calculate(symbolTable) - this->getRightExp()->calculate(symbolTable));
+double Minus::calculate() {
+    return (this->getLeftExp()->calculate() - this->getRightExp()->calculate());
 }
 
 /**

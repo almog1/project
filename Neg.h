@@ -8,7 +8,7 @@
 #include "UnaryExpression.h"
 #include <map>
 
-class Neg : public UnaryExpression{
+class Neg : public UnaryExpression {
 public:
     /**
      *
@@ -21,6 +21,7 @@ public:
      * @param symbolTable the table that contains all the variables in the programm
      * @return the calculation of the expression
      */
-    double calculate(map<string, double> symbolTable) override;
+    double calculate() override;
 };
+
 #endif //PROGECT_NEG_H

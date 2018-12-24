@@ -13,7 +13,7 @@ Number::Number(double value) : value(value) {}
  * @param symbolTable a table that consist all the variables in the map
  * @return the value of the number
  */
-double Number::calculate(map<string, double> symbolTable) {
+double Number::calculate() {
     return this->value;
 }
 

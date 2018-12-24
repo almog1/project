@@ -6,7 +6,7 @@
  * @param symbolTable the table that contains all the variables in the program
  * @return the calculation of the expression
  */
-double CommandExpression::calculate(map<string, double> symbolTable) {
+double CommandExpression::calculate() {
     this->command->doCommand();
     //todo need to return double
 }

@@ -8,6 +8,7 @@
 #include "ConnectCommand.h"
 #include "CommandExpression.h"
 #include "LoopCommand.h"
+#include "PrintCommand.h"
 
 #define OPEN_DATA_SERVER "openDataServer"
 #define CONNECT "connect"
@@ -23,26 +24,26 @@ CommandTable::CommandTable() {
             pair<string, Expression *>(OPEN_DATA_SERVER, new CommandExpression(new OpenDataServer())));
     this->commandTable.insert(pair<string, Expression *>(CONNECT, new CommandExpression(new ConnectCommand())));
     this->commandTable.insert(pair<string, Expression *>(VAR, new CommandExpression(new VarCommand())));
-    this->commandTable.insert(pair<string, Expression*>(WHILE, new CommandExpression(new LoopCommand())));
-
+    this->commandTable.insert(pair<string, Expression *>(WHILE, new CommandExpression(new LoopCommand())));
+    this->commandTable.insert(pair<string, Expression *>(PRINT, new CommandExpression(new PrintCommand())));
 }
 
-void CommandTable::addValue(string commandName, Expression* exp) {
+void CommandTable::addValue(string commandName, Expression *exp) {
     //check if already in map - change its value
     //else- insert as pair
-    map<string, Expression* > ::iterator it;
+    map<string, Expression *>::iterator it;
     it = this->commandTable.find(commandName);
 
-    if(it != this->commandTable.end()){
+    if (it != this->commandTable.end()) {
         //exist - need to update the value
         this->commandTable[commandName] = exp;
-    }else{
+    } else {
         //if not exist - need to add the pair
-        this->commandTable.insert(pair<string, Expression*>(commandName,exp));
+        this->commandTable.insert(pair<string, Expression *>(commandName, exp));
     }
 }
 
-CommandTable* CommandTable::getInstance() {
+CommandTable *CommandTable::getInstance() {
     //if null - create new one
     if (instance == nullptr) {
         instance = new CommandTable();
@@ -50,6 +51,6 @@ CommandTable* CommandTable::getInstance() {
     return instance;
 }
 
-map<string, Expression*> CommandTable::getTable() {
+map<string, Expression *> CommandTable::getTable() {
     return this->commandTable;
 }

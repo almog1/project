@@ -47,7 +47,7 @@ int ConnectCommand::setParameters(vector<string> data, int index) {
     this->ip = data[index + 1];
     string portStr = putSpaces(data[index + 2]);
     Expression *portExp = evaluate(portStr);
-    this->port = (int) (portExp->calculate(*symbolTab->getSymbolTable()));
+    this->port = (int) (portExp->calculate());
 
     //read connect command name and two arguments
     return 3;

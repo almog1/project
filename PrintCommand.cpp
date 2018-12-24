@@ -11,13 +11,13 @@ PrintCommand::PrintCommand() {
 }
 
 int PrintCommand::setParameters(vector<string> data, int index) {
-    SymbolTable * symbolTab = SymbolTable::getInstance();
+    SymbolTable *symbolTab = SymbolTable::getInstance();
 
     //take the first and second
     //put spaces in the sleep string
     string sleepStr = putSpaces(data[index + 1]);
     Expression *sleepExp = evaluate(sleepStr);
-    this->printStr = (int) (sleepExp->calculate(*symbolTab->getSymbolTable()));
+    this->printStr = (int) (sleepExp->calculate());
 
     //read the command name and the var of it - num of time for sleeping
     return 2;

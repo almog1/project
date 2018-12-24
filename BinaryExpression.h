@@ -28,7 +28,7 @@ public:
      * @param symbolTable the table has all the variables we can use at
      * @return the evaluate the expression using the variable values provided and return the result.
      */
-    virtual double calculate(map<string,double> symbolTable) = 0;
+    virtual double calculate() = 0;
 
 };
 

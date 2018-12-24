@@ -25,7 +25,7 @@ public:
      * @param symbolTable the table that contains all the variables in the program
      * @return the calculation of the expression
      */
-    virtual double calculate(map<string, double> symbolTable);
+    virtual double calculate();
 
     /**
      *

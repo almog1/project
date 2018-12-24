@@ -55,7 +55,7 @@ int VarCommand::setParameters(vector<string> data, int index) {
             string val = putSpaces(data[index + 3]);
             Expression *valExp = evaluate(val);
 
-            value = valExp->calculate(*symbolTab->getSymbolTable());
+            value = valExp->calculate();
 
             //if it will be just name of var - it will take it from the map and return its value there
             //need to put its value in string value
@@ -79,7 +79,7 @@ int VarCommand::setParameters(vector<string> data, int index) {
         //if it can be an expression
         string val = putSpaces(data[index + 2]);
         Expression *valExp = evaluate(val);
-        value = valExp->calculate(*symbolTab->getSymbolTable());
+        value = valExp->calculate();
         //take the expression value
 
         symbolTab->addSymbolValue(varName,value);

@@ -57,7 +57,7 @@ void Parser::parser(vector<string> data) {
             }
             index += dataCommand->getCommand()->setParameters(data, index);
 
-            dataCommand->calculate(*symbolTab->getSymbolTable());
+            dataCommand->calculate();
 
             //todo need to check if everything entered
         }

@@ -23,7 +23,7 @@ public:
      * @param symbolTable the table that contains all the variables
      * @return the calclation of the plus expression
      */
-    double calculate(map<string, double> symbolTable) override;
+    double calculate() override;
 
 
 };

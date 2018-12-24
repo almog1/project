@@ -3,6 +3,6 @@
 
 Neg::Neg(Expression *expression) : UnaryExpression(expression) {}
 
-double Neg::calculate(map<string, double> symbolTable) {
-    return (this->expression->calculate(symbolTable) * (-1));
+double Neg::calculate() {
+    return (this->expression->calculate() * (-1));
 }

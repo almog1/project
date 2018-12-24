@@ -6,8 +6,8 @@
  * @param symbolTable the table that contains all the variables
  * @return the calclation of the mult expression
  */
-double Mult::calculate(map<string,double> symbolTable) {
-    return (this->getLeftExp()->calculate(symbolTable) * this->getRightExp()->calculate(symbolTable));
+double Mult::calculate() {
+    return (this->getLeftExp()->calculate() * this->getRightExp()->calculate());
 }
 
 /**

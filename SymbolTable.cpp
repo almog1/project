@@ -51,9 +51,15 @@ void SymbolTable::addSymbolValue(string varName, double value) {
     }
 }
 
-map<string, double> *SymbolTable::getSymbolTable() {
-    return &this->symbolTable;
+//return the value of this var
+double SymbolTable::getValue(string varName) {
+    //return the value of this var Name
+    return this->symbolTable.find(varName)->second;
 }
+
+//map<string, double> *SymbolTable::getSymbolTable() {
+//    return &this->symbolTable;
+//}
 
 //add path to the var name - if exist - replace the path
 void SymbolTable::addPathToVar(string varName, string path) {

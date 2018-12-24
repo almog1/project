@@ -33,7 +33,7 @@ public:
 
     double getValue() const;
 
-    double calculate(map<string,double> symbolTable) override;
+    double calculate() override;
 };
 
 #endif //PROGECT_VAR_H

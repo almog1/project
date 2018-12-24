@@ -14,7 +14,7 @@ using namespace std;
  */
 class Expression {
 public:
-    virtual double calculate(map<string,double> symbolTable) = 0;
+    virtual double calculate() = 0;
 };
 
 

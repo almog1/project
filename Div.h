@@ -26,7 +26,7 @@ public:
      * @param symbolTable the table that contains all the variables
      * @return the calclation of the div expression
      */
-    double calculate(map<string,double> symbolTable) override;
+    double calculate() override;
 };
 
 #endif //PROGECT_DIV_H

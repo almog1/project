@@ -56,11 +56,11 @@ int OpenDataServer::setParameters(vector<string> data, int index) {
     //put spaces in the port string
     string portStr = putSpaces(data[index + 1]);
     Expression *portExp = evaluate(portStr);
-    this->port = (int) (portExp->calculate(*symbolTab->getSymbolTable()));
+    this->port = (int) (portExp->calculate());
 
     string hzStr = putSpaces(data[index + 2]);
     Expression *hzExp = evaluate(hzStr);
-    this->hz = (int) (hzExp->calculate(*symbolTab->getSymbolTable()));
+    this->hz = (int) (hzExp->calculate());
 
     //read the command name and two arguments
     return 3;

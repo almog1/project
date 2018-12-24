@@ -26,9 +26,9 @@ void Var::setValue(double value) {
     Var::value = value;
 }
 
-double Var::calculate(map<string,double> symbolTable) {
-    //SymbolTable *symbolTable = SymbolTable::getInstance();
-    return symbolTable.at(this->name);
+double Var::calculate() {
+    SymbolTable *symbolTable = SymbolTable::getInstance();
+    return symbolTable->getValue(this->name);
 }
 
 Var::Var(const string &name, const string &path, double value) : name(name), path(path), value(value) {

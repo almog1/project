@@ -9,7 +9,7 @@
 
 class Pow : public BinaryExpression{
 public:
-    double calculate(map<string,double> symbolTable) override;
+    double calculate() override;
 
 public:
     Pow(Expression *leftExp, Expression *rightExp);

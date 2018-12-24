@@ -31,7 +31,9 @@ public:
 
     void addValueByPathIndex(int index, double val);
 
-    map<string,double > *getSymbolTable();
+    double getValue(string varName);
+
+   // map<string,double > *getSymbolTable();
 
 
 };
