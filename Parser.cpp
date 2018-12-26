@@ -57,13 +57,9 @@ void Parser::parser(vector<string> data) {
             }
 
             index += dataCommand->getCommand()->setParameters(data, index);
-            //for tesets start
-          //  if(data[index] == "while"){
-            //    dataCommand->calculate();
-            //}
-            //for teset end
+
             //todo return the do command
-          //  dataCommand->calculate();
+            dataCommand->calculate();
 
             //todo need to check if everything entered
 

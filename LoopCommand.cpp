@@ -45,7 +45,7 @@ void LoopCommand::doCommand() {
         for (int i = 0; i < this->commands.size(); i++) {
             //todo - make the calautale
 
-//            this->commands[i]->calculate(); //do the command
+            this->commands[i]->calculate(); //do the command
         }
     }
 }
