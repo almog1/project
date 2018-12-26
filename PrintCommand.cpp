@@ -12,12 +12,18 @@ PrintCommand::PrintCommand() {
 int PrintCommand::setParameters(vector<string> data, int index) {
     SymbolTable *symbolTab = SymbolTable::getInstance();
 
+    string str;
     //take the first and second
-    //put spaces in the sleep string
-    string temp=data[index + 1].substr(1,data[index+1].size()-2);
-    string sleepStr = putSpaces(temp);
-    Expression *sleepExp = evaluate(sleepStr);
-    this->printStr = (int) (sleepExp->calculate());
+    //check if string
+    if(data[index+1].at(0) == '"'){
+        this->printStr = data[index + 1].substr(1,data[index+1].size()-2);
+    }else{
+        //expression
+        str = data[index+1];
+        str = putSpaces(str);
+        Expression * printExp = evaluate(str);
+        this->printStr = to_string(printExp->calculate());
+    }
 
     //read the command name and the var of it - num of time for sleeping
     return 2;
