@@ -32,7 +32,7 @@ void Parser::parser(vector<string> data) {
     SymbolTable * symbolTab = SymbolTable::getInstance();
 
     //check the data
-    vector<string>::iterator it;
+    //vector<string>::iterator it;
     int index = 0;
 
     CommandTable *commandTab = CommandTable::getInstance();
@@ -59,11 +59,18 @@ void Parser::parser(vector<string> data) {
                 //need to go to the VarCommand
                 dataCommand = dynamic_cast<CommandExpression *>(this->commandTable.find(VAR)->second);
             }
+
             index += dataCommand->getCommand()->setParameters(data, index);
 
+            //todo return the do command
             dataCommand->calculate();
 
             //todo need to check if everything entered
+
+            //after everything run - can initilize the map
+            commandTab->setMapValues();
+
+            this->commandTable = commandTab->getTable();
         }
     }
 }
