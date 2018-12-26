@@ -2,6 +2,7 @@
 // Created by almogg on 12/22/18.
 //
 
+#include <iostream>
 #include "LoopCommand.h"
 #include "CommandTable.h"
 #include "OtherFunctions.h"
@@ -25,7 +26,7 @@ int LoopCommand::setParameters(vector<string> data, int index) {
     this->condition = data[index + 2];
 
     //create the loop command - create the vector of commands
-    newIndex = this->createLoop(data, newIndex);
+    newIndex += this->createLoop(data, index + 5);
 
     //take the expression value
     return newIndex;
@@ -36,8 +37,15 @@ void LoopCommand::doCommand() {
     //as long as the condition is true - run on all the commands in the loop
     while (this->checkCondition()) {
         int i = 0;
+
+        //for test
+        cout << i + 1 << "LOOP TIME" << endl;
+        //todo - delete the test
+
         for (int i = 0; i < this->commands.size(); i++) {
-            this->commands[i]->calculate(); //do the command
+            //todo - make the calautale
+
+//            this->commands[i]->calculate(); //do the command
         }
     }
 }
@@ -45,7 +53,11 @@ void LoopCommand::doCommand() {
 int LoopCommand::createLoop(vector<string> data, int index) {
     CommandTable *commandTab = CommandTable::getInstance();
     map<string, Expression *> commandTable = commandTab->getTable();
+    commandTab->setMapValues();
 
+    commandTable = commandTab->getTable();
+
+    int newIndex = index;
     //check its not the end of the loop
     //and data isn't over
     while (index < data.size() && data[index] != "}") {
@@ -69,12 +81,17 @@ int LoopCommand::createLoop(vector<string> data, int index) {
 
         //add the command to the vector of commands
         commands.push_back(dataCommand);
+
+        commandTab->setMapValues();
+
+        commandTable = commandTab->getTable();
     }
     //check if this is the '}'
     if (data[index] == "}") {
         index = index + 1;
     }
-    return index;
+    newIndex = index - newIndex; //return the between old and new
+    return newIndex;
 }
 
 bool LoopCommand::checkCondition() {

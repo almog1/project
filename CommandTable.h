@@ -7,6 +7,7 @@
 #include <map>
 #include <string>
 #include "CommandExpression.h"
+#include "LoopCommand.h"
 
 using namespace std;
 
@@ -17,12 +18,15 @@ private:
     CommandTable();
 
     map<string, Expression*> commandTable;
+    vector<Expression*> allExp;
 public:
     static CommandTable *getInstance();
 
-    void addValue(string commandName, Expression* exp);
+    void addValue(string commandName, Expression *exp);
 
     map<string, Expression*> getTable();
+
+    void setMapValues();
 
 };
 

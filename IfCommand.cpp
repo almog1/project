@@ -18,8 +18,8 @@ int IfCommand::setParameters(vector<string> data, int index) {
     //save the condition
     this->condition = data[index + 2];
 
+    newIndex += this->createCommands(data, index + 5);
     //create the loop command - create the vector of commands
-    newIndex = this->createCommands(data, newIndex);
 
     //take the expression value
     return newIndex;
@@ -39,6 +39,10 @@ void IfCommand::doCommand() {
 int IfCommand::createCommands(vector<string> data, int index) {
     CommandTable *commandTab = CommandTable::getInstance();
     map<string, Expression *> commandTable = commandTab->getTable();
+    commandTab->setMapValues();
+
+    commandTable = commandTab->getTable();
+    int newIndex = index;
 
     //check its not the end of the if condition
     while (index < data.size() && data[index] != "}") {
@@ -58,12 +62,17 @@ int IfCommand::createCommands(vector<string> data, int index) {
         index += dataCommand->getCommand()->setParameters(data, index);
         //add the command to the vector of commands
         this->commands.push_back(dataCommand);
+
+        commandTab->setMapValues();
+
+        commandTable = commandTab->getTable();
     }
     //check if this is the '}'
     if (data[index] == "}") {
         index = index + 1;
     }
-    return index;
+    newIndex = index - newIndex; //return the between old and new
+    return newIndex;
 }
 
 bool IfCommand::checkIfCondition() {

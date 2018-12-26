@@ -55,11 +55,22 @@ void Parser::parser(vector<string> data) {
                 //need to go to the VarCommand
                 dataCommand = dynamic_cast<CommandExpression *>(this->commandTable.find(VAR)->second);
             }
-            index += dataCommand->getCommand()->setParameters(data, index);
 
-            dataCommand->calculate();
+            index += dataCommand->getCommand()->setParameters(data, index);
+            //for tesets start
+          //  if(data[index] == "while"){
+            //    dataCommand->calculate();
+            //}
+            //for teset end
+            //todo return the do command
+          //  dataCommand->calculate();
 
             //todo need to check if everything entered
+
+            //after everything run - can initilize the map
+            commandTab->setMapValues();
+
+            this->commandTable = commandTab->getTable();
         }
     }
 }
