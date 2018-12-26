@@ -44,6 +44,10 @@ void Parser::parser(vector<string> data) {
             //todo - downcast!!!!!
             map<string, Expression*>::iterator it;
 
+            SymbolTable *ins=SymbolTable::getInstance();
+            while (ins->getServerId()>0 && !ins->isConnect()) {
+                sleep(1/10);
+            }
             //need to find the command
             it = this->commandTable.find(data[index]);
             CommandExpression *dataCommand;

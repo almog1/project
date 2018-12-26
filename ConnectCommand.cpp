@@ -57,6 +57,8 @@ int ConnectCommand::setParameters(vector<string> data, int index) {
  * run the connect command
  */
 void ConnectCommand::doCommand() {
+    SymbolTable*table=SymbolTable::getInstance();
+    table->setConnect(false);
     struct MyParams *params = new MyParams();
     params->port = this->port;
     params->ip = this->ip;
