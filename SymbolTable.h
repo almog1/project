@@ -12,6 +12,11 @@
 using namespace std;
 
 class SymbolTable {
+    int clientId = -1;
+    int serverId = -1;
+    bool connect = true;
+    bool server = true;
+
 private:
     static SymbolTable *instance;
 
@@ -19,10 +24,12 @@ private:
 
     map<string, double> symbolTable;
     map<string, string> varPathTable;
-    map<string, double > pathDouble;
+    map<string, double> pathDouble;
     vector<string> names;
 
 public:
+    void setServerId(int serverId);
+
     static SymbolTable *getInstance();
 
     void addSymbolValue(string varName, double value);
@@ -36,9 +43,29 @@ public:
     string getVarPath(string varName);
 
     void setValuesInSymbolTable();
-   // map<string,double > *getSymbolTable();
 
+    /**
+     *
+     * @param var a specific var
+     * @return 'true' if the val exist in the map, 'false' otherwise
+     */
+    bool isValExist(string var);
 
+    bool isConnect() const;
+
+    void setConnect(bool connect);
+
+    void setClientId(int clientId);
+
+    int getClientId() const;
+
+    int getServerId() const;
+
+    const vector<string> &getNames() const;
+
+    bool isServer() const;
+
+    void setServer(bool server);
 };
 
 #endif //PROGECT_SYMBOLTABLE_H

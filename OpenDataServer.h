@@ -4,7 +4,7 @@
 
 #include "Command.h"
 #include "ServerSocket.h"
-
+using namespace std;
 
 /**
  * OpenDataServer Class
@@ -31,6 +31,8 @@ public:
      * @return how much we need to move on the array (the num of values for a specific command)
      */
     int setParameters(vector<string> data, int index) override;
+
+    void open();
 
     /**
      * run the command

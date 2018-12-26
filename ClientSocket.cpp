@@ -1,5 +1,6 @@
 
 #include "ClientSocket.h"
+#include "SymbolTable.h"
 #include <netdb.h>
 
 struct MyParams {
@@ -10,8 +11,9 @@ struct MyParams {
 /*
  * openning client socket thats connects the simulator
  */
-void* ClientSocket::openSocket(void *arg) {
+void *ClientSocket::openSocket(void *arg) {
     struct MyParams *params = (struct MyParams *) arg;
+    SymbolTable *table = SymbolTable::getInstance();
 
     int sockfd, portno;
     struct sockaddr_in serv_addr;
@@ -23,7 +25,7 @@ void* ClientSocket::openSocket(void *arg) {
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
     //save socketid in data class
-    //params->data->setClientId(sockfd);
+    table->setClientId(sockfd);
 
     if (sockfd < 0) {
         perror("ERROR opening socket");
@@ -47,4 +49,5 @@ void* ClientSocket::openSocket(void *arg) {
         perror("ERROR connecting");
         exit(1);
     }
+    table->setConnect(true);
 }

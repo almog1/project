@@ -7,7 +7,6 @@
 #include "SymbolTable.h"
 
 PrintCommand::PrintCommand() {
-    //todo check if we need to write something here
 }
 
 int PrintCommand::setParameters(vector<string> data, int index) {
@@ -15,7 +14,8 @@ int PrintCommand::setParameters(vector<string> data, int index) {
 
     //take the first and second
     //put spaces in the sleep string
-    string sleepStr = putSpaces(data[index + 1]);
+    string temp=data[index + 1].substr(1,data[index+1].size()-2);
+    string sleepStr = putSpaces(temp);
     Expression *sleepExp = evaluate(sleepStr);
     this->printStr = (int) (sleepExp->calculate());
 

@@ -4,14 +4,32 @@
 #include "SymbolTable.h"
 
 /**
+ * Split the line by char .
+ * @param line . string the line to split
+ * @param divide . char to split by it
+ * @return vector after been splitted
+ */
+vector<string> Split(string line, char divide) {
+    stringstream temp(line);
+    //create from the line
+    string segment;
+    vector<std::string> seglist;
+    //split by ","
+    while (getline(temp, segment, divide)) {
+        seglist.push_back(segment);
+    }
+    return seglist;
+}
+
+/**
  *
  * @param fileName the file name that contains all the data the user enters
  * @return a vaector that contains all the words in the file (command and expression)
  */
 vector<string> Lexer(string fileName) {
-  //  SymbolTable *s = SymbolTable::getInstance();
-  //  map<string,double > symbols = s->getSymbolTable();
-   // s->addValue("z",10);
+    //  SymbolTable *s = SymbolTable::getInstance();
+    //  map<string,double > symbols = s->getSymbolTable();
+    // s->addValue("z",10);
 
     vector<string> data;
     bool isInOp = false;
@@ -104,8 +122,8 @@ vector<string> Lexer(string fileName) {
                                 if(lastIsDigit){
                                     data[data.size() - 1] = data[data.size() - 1] + segment;
                                 } else{
-                                //need new place in the vector - not a continue of reg
-                                data.push_back(segment);}
+                                    //need new place in the vector - not a continue of reg
+                                    data.push_back(segment);}
                             } else {
                                 //here if equal in line - need to check if last one is '='
                                 if (latIsEqual) {
@@ -196,22 +214,4 @@ vector<string> Lexer(string fileName) {
         ifs.close();
     }
     return data;
-}
-
-/**
- * Split the line by char .
- * @param line . string the line to split
- * @param divide . char to split by it
- * @return vector after been splitted
- */
-vector<string> Split(string line, char divide) {
-    stringstream temp(line);
-    //create from the line
-    string segment;
-    vector<std::string> seglist;
-    //split by ","
-    while (getline(temp, segment, divide)) {
-        seglist.push_back(segment);
-    }
-    return seglist;
 }

@@ -2,19 +2,18 @@
 // Created by almogg on 12/18/18.
 //
 
+#include <iostream>
 #include "VarCommand.h"
 #include "OtherFunctions.h"
 #include "Expression.h"
 #include "SymbolTable.h"
+#include "equalsCommand.h"
+#include "CommandExpression.h"
 
 VarCommand::VarCommand() {
-    //todo - check if need to set something in the constructor
 }
 
 int VarCommand::setParameters(vector<string> data, int index) {
-    SymbolTable * symbolTab = SymbolTable::getInstance();
-
-
     int newIndex = 0;
     string varName = "";
     //check if first is Var
@@ -24,9 +23,8 @@ int VarCommand::setParameters(vector<string> data, int index) {
         if ((index + 4) > data.size()) {
             throw "Not Enough Args!";
         }
-
         //second is the var name
-        varName = data[index + 1];
+        this->var = data[index + 1];
         string varPath = "";
         //third should be '='
         if (data[index + 2] != "=") {
@@ -35,33 +33,27 @@ int VarCommand::setParameters(vector<string> data, int index) {
 
         //check if 'bind'
         if (data[index + 3] == "bind") {
+            this->isBind = true;
             //take the string
             //make sure in the values
             if ((index + 5) > data.size()) {
                 throw "Not Enoght Args!";
             }
-            varPath = data[index + 4];
+            this->path = data[index + 4].substr(1, data[index + 4].size() - 2);
 
-            //insert the var name with its path
-            symbolTab->addPathToVar(varName,varPath);
-
-           // this->varPathTable.insert(pair<string, string>(varName, varPath));
             newIndex = 5;
-            //todo - check if need with or without the ""
         } else {
+           // this->isBind = false;
             //other var name
             double value;
             //if it can be an expression
             string val = putSpaces(data[index + 3]);
             Expression *valExp = evaluate(val);
 
-            value = valExp->calculate();
+            this->val = valExp->calculate();
 
             //if it will be just name of var - it will take it from the map and return its value there
             //need to put its value in string value
-            // value = this->symbolTable.at(data[index + 3]);
-
-            symbolTab->addSymbolValue(varName,value);
             newIndex = 4;
         }
     } else {
@@ -70,25 +62,43 @@ int VarCommand::setParameters(vector<string> data, int index) {
         if ((index + 3) > data.size()) {
             throw "Not Enough Args!";
         }
-        varName = data[index];
+        this->var = data[index];
         if (data[index + 1] != "=") {
             throw "Should be '=' here!";
         }
-
-        double value;
         //if it can be an expression
         string val = putSpaces(data[index + 2]);
         Expression *valExp = evaluate(val);
-        value = valExp->calculate();
+        this->val = valExp->calculate();
         //take the expression value
 
-        symbolTab->addSymbolValue(varName,value);
         newIndex = 3;
     }
-    //todo - make sure need to return 5 and not 4
     return newIndex;
 }
 
 void VarCommand::doCommand() {
+    SymbolTable *symbolTab = SymbolTable::getInstance();
+    //update the maps and send a message to the simulator
+    if (this->isBind) {
+        //insert the var name with its path
+        symbolTab->addPathToVar(this->var, this->path);
+        this->isBind=false;
+    } else {
+        //check if the varName exist in the map 'var-path'
+        if (symbolTab->isValExist(this->var)) {
+            //need to send a mess to the server about the chaning
+            Command *equalsComm = new equalsCommand();
+            vector<string> params;
+            params.push_back(this->var);
+            params.push_back(to_string(this->val));
+            equalsComm->setParameters(params, 0);
+            equalsComm->doCommand();
+        } else {
+            //update the symbol table
+            symbolTab->addSymbolValue(this->var, this->val);
+        }
+    }
+    cout<<this->var<<endl;
 
 }

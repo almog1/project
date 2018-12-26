@@ -126,4 +126,56 @@ string SymbolTable::getVarPath(string varName) {
         //if exist - return its value - the path
         varPath = it->second; //the real path
     }
+    return varPath;
 }
+
+/**
+ *
+ * @param val a specific var
+ * @return 'true' if the var exist in the map and 'false' otherwise
+ */
+bool SymbolTable::isValExist(string var) {
+    map<string, string>::iterator it;
+    it = this->varPathTable.find(var);
+    if (it != this->varPathTable.end()) {
+        return true;
+    }
+    return false;
+}
+
+void SymbolTable::setClientId(int clientId) {
+    this->clientId = clientId;
+}
+
+int SymbolTable::getClientId() const {
+    return clientId;
+}
+
+void SymbolTable::setServerId(int serverId) {
+    SymbolTable::serverId = serverId;
+}
+
+int SymbolTable::getServerId() const {
+    return serverId;
+}
+
+bool SymbolTable::isConnect() const {
+    return connect;
+}
+
+void SymbolTable::setConnect(bool connect) {
+    SymbolTable::connect = connect;
+}
+
+const vector<string> &SymbolTable::getNames() const {
+    return names;
+}
+
+bool SymbolTable::isServer() const {
+    return server;
+}
+
+void SymbolTable::setServer(bool server) {
+    SymbolTable::server = server;
+}
+
