@@ -43,6 +43,7 @@ Expression *evaluate(string tokens) {
 
     for (i = 0; i < tokens.length(); i++) {
 
+
         // Current token is a whitespace,
         // skip it.
         if (tokens[i] == ' ')
@@ -52,11 +53,7 @@ Expression *evaluate(string tokens) {
             // brace, push it to 'ops'
         else if (tokens[i] == '(') {
             ops.push(tokens[i]);
-        } else if ((tokens[i] == '-') && (!(isdigit(tokens[i-2])))) {
-            neg = true;
-            continue;
         }
-
             // Current token is a number, push
             // it to stack for numbers.
         else if (isdigit(tokens[i])) {
@@ -74,11 +71,7 @@ Expression *evaluate(string tokens) {
                     if (isDouble) {
                         dobleVal = dobleVal / 10;
                     }
-                    if (neg) {
-                        val = (-1) * ((val * 10) + (tokens[i] - '0'));
-                        neg = false;
-                    } else
-                        val = (val * 10) + (tokens[i] - '0');
+                    val = (val * 10) + (tokens[i] - '0');
                 }
                 i++;
             }

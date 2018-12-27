@@ -11,4 +11,6 @@ using namespace std;
 
 string putSpaces(string str);
 
+string newStr (string str);
+
 #endif //PROGECT_OTHERFUNCTIONS_H
