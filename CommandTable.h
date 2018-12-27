@@ -11,15 +11,19 @@
 
 using namespace std;
 
+/**
+ * CommandTable Class
+ *
+ */
 class CommandTable {
 private:
     static CommandTable *instance;
-
-    CommandTable();
-
     map<string, Expression*> commandTable;
     vector<Expression*> allExp;
+
 public:
+    CommandTable();
+
     static CommandTable *getInstance();
 
     void addValue(string commandName, Expression *exp);

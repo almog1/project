@@ -22,6 +22,11 @@ using namespace std;
  */
 class ClientSocket {
 public:
+    /**
+    *
+    * @param arg
+    * @return openning client socket thats connects the simulator
+    */
     static void *openSocket(void *arg);
 };
 

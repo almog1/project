@@ -8,8 +8,10 @@ struct MyParams {
     int port;
 };
 
-/*
- * openning client socket thats connects the simulator
+/**
+ *
+ * @param arg
+ * @return openning client socket thats connects the simulator
  */
 void *ClientSocket::openSocket(void *arg) {
     struct MyParams *params = (struct MyParams *) arg;

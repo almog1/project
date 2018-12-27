@@ -14,7 +14,6 @@ using namespace std;
 ifstream file;
 
 int main(int argc, char* argv[]) {
-  //  std::cout << "Hello, World!" << std::endl;
     string fileName = "";
     if(argc >= 1){
         fileName = argv[1];
@@ -25,6 +24,4 @@ int main(int argc, char* argv[]) {
     parserRun->parser(data);
 
     pthread_exit(NULL);
-
-    return 0;
 }
