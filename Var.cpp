@@ -29,9 +29,6 @@ void Var::setValue(double value) {
 
 double Var::calculate() {
     SymbolTable *symbolTable = SymbolTable::getInstance();
-    if(this->name == "rudder"){
-        cout<<"IN CALCULATE"<<symbolTable->getValue(this->name)<<endl;
-    }
     return symbolTable->getValue(this->name);
 }
 

@@ -10,20 +10,19 @@
 #include "SymbolTable.h"
 
 using namespace std;
+
 ifstream file;
 
-int main() {
-    std::cout << "Hello, World!" << std::endl;
+int main(int argc, char* argv[]) {
+  //  std::cout << "Hello, World!" << std::endl;
+    string fileName = "";
+    if(argc >= 1){
+        fileName = argv[1];
+    }
 
-//    OpenDataServer *dataServer = new OpenDataServer();
-//    dataServer->setPort(5400);
-//    dataServer->setHz(10);
-//    dataServer->doCommand();
-
-
-    vector<string> data = Lexer("test1.txt");
-    Parser parserRun;
-    parserRun.parser(data);
+    vector<string> data = Lexer(fileName);
+    Parser* parserRun = new Parser();
+    parserRun->parser(data);
 
     pthread_exit(NULL);
 

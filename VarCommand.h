@@ -15,8 +15,13 @@ class VarCommand : public Command {
     string var;
     double val;
     string path;
+
+    bool isCommandExist;
+    Command* command;
 public:
     VarCommand();
+
+    ~VarCommand();
 
     int setParameters(vector<string> data, int index) override;
 

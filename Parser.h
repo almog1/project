@@ -17,6 +17,7 @@ class Parser {
     map<string, Expression*> commandTable;
 public:
     Parser();
+    ~Parser();
     void parser(vector<string> data);
 };
 

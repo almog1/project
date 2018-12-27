@@ -58,12 +58,15 @@ void *ServerSocket::openSocket(void *arg) {
         }
         info.push_back(buff.substr(0, pos));
         buff = "";
+
         for (int i = 0; i < paths.size(); ++i) {
             table->addValueByPathIndex(i, stod(info[i]));
         }
         table->setValuesInSymbolTable();
+
         buff += leftOvers;
         leftOvers = "";
+
     }
 //    table->setServer(true);
 }

@@ -8,8 +8,7 @@
 SymbolTable *SymbolTable::instance = nullptr;
 
 SymbolTable::SymbolTable() {
-    pthread_mutex_init(this->mutex,nullptr);
-
+    pthread_mutex_init(&mutex, nullptr);
     this->names = {"/instrumentation/airspeed-indicator/indicated-speed-kt",
                    "/instrumentation/altimeter/indicated-altitude-ft",
                    "/instrumentation/altimeter/pressure-alt-ft",
@@ -39,10 +38,12 @@ SymbolTable *SymbolTable::getInstance() {
     return instance;
 }
 
+
+
 void SymbolTable::addSymbolValue(string varName, double value) {
     //check if already in map - change its value
     //else- insert as pair
-    pthread_mutex_lock(mutex);
+    pthread_mutex_lock(&mutex);
     map<string, double>::iterator it;
     it = this->symbolTable.find(varName);
 
@@ -53,16 +54,17 @@ void SymbolTable::addSymbolValue(string varName, double value) {
         //if not exist - need to add the pair
         this->symbolTable.insert(pair<string, double>(varName, value));
     }
-    pthread_mutex_unlock(mutex);
-
+    pthread_mutex_unlock(&mutex);
 }
 
 //return the value of this var
 double SymbolTable::getValue(string varName) {
-    pthread_mutex_lock(mutex);
+    pthread_mutex_lock(&mutex);
+
     double num = this->symbolTable.find(varName)->second;
     //return the value of this var Name
-    pthread_mutex_unlock(mutex);
+    pthread_mutex_unlock(&mutex);
+
     return num;
 }
 
@@ -72,7 +74,6 @@ double SymbolTable::getValue(string varName) {
 
 //add path to the var name - if exist - replace the path
 void SymbolTable::addPathToVar(string varName, string path) {
-    pthread_mutex_lock(mutex);
     map<string, string>::iterator it;
     it = this->varPathTable.find(varName);
 
@@ -84,11 +85,10 @@ void SymbolTable::addPathToVar(string varName, string path) {
         this->varPathTable.insert(pair<string, string>(varName, path));
     }
     cout << "Added to path var " << this->varPathTable[varName] << endl;
-    pthread_mutex_unlock(mutex);
-
 }
 
 void SymbolTable::addValueByPathIndex(int index, double val) {
+
     //take the name in this place
     string path = this->names[index];
 
@@ -103,6 +103,7 @@ void SymbolTable::addValueByPathIndex(int index, double val) {
         //if not exist - need to add the pair
         this->pathDouble.insert(pair<string, double>(path, val));
     }
+
 }
 
 void SymbolTable::setValuesInSymbolTable() {
@@ -110,7 +111,8 @@ void SymbolTable::setValuesInSymbolTable() {
     string varName = "";
     string varPath = "";
     double val;
-    pthread_mutex_lock(mutex);
+
+    pthread_mutex_lock(&mutex);
     cout << "VALUES IN MAP FUNCTION" << endl;
     if (this->varPathTable.empty() == false) {
         for (it = this->varPathTable.begin(); it != this->varPathTable.end(); ++it) {
@@ -134,19 +136,14 @@ void SymbolTable::setValuesInSymbolTable() {
                     //if not exist - need to add the pair
                     this->symbolTable.insert(pair<string, double>(varName, val));
                 }
-                //for test
-                if(varName == "rudder"){
-                    cout<<"THIS IS SET MAP" << iter->second <<endl;
-                }
             }
         }
     }
-    pthread_mutex_unlock(mutex);
+    pthread_mutex_unlock(&mutex);
     //it->first << " => " << it->second << '\n';
 }
 
 string SymbolTable::getVarPath(string varName) {
-    pthread_mutex_lock(mutex);
     map<string, string>::iterator it;
     string varPath = "";
 
@@ -156,7 +153,6 @@ string SymbolTable::getVarPath(string varName) {
         //if exist - return its value - the path
         varPath = it->second; //the real path
     }
-    pthread_mutex_unlock(mutex);
     return varPath;
 }
 
@@ -166,14 +162,14 @@ string SymbolTable::getVarPath(string varName) {
  * @return 'true' if the var exist in the map and 'false' otherwise
  */
 bool SymbolTable::isValExist(string var) {
-    pthread_mutex_lock(mutex);
+
     bool isExist = false;
     map<string, string>::iterator it;
     it = this->varPathTable.find(var);
     if (it != this->varPathTable.end()) {
         isExist = true;
     }
-    pthread_mutex_unlock(mutex);
+
     return isExist;
 }
 

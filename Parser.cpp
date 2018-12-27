@@ -21,15 +21,14 @@
 
 
 Parser::Parser() {
- //   this->commandTable.insert(
-   //         pair<string, Expression *>(OPEN_DATA_SERVER, new CommandExpression(new OpenDataServer())));
-   // this->commandTable.insert(pair<string, Expression *>(CONNECT, new CommandExpression(new ConnectCommand())));
-   // this->commandTable.insert(pair<string, Expression *>(VAR, new CommandExpression(new VarCommand())));
-   // this->commandTable.insert(pair<string, Expression*>(WHILE, new CommandExpression(new LoopCommand())));
+}
+
+Parser::~Parser() {
+
 }
 
 void Parser::parser(vector<string> data) {
-    SymbolTable * symbolTab = SymbolTable::getInstance();
+    SymbolTable *symbolTab = SymbolTable::getInstance();
 
     //check the data
     //vector<string>::iterator it;
@@ -42,19 +41,19 @@ void Parser::parser(vector<string> data) {
         //vector not empty
         if (data.empty() == false) {
             //todo - downcast!!!!!
-            map<string, Expression*>::iterator it;
+            map<string, Expression *>::iterator it;
 
-            SymbolTable *ins=SymbolTable::getInstance();
-            while (ins->getServerId()>0 && !ins->isConnect()) {
-                sleep(1/10);
+            SymbolTable *ins = SymbolTable::getInstance();
+            while (ins->getServerId() > 0 && !ins->isConnect()) {
+                sleep(1 / 10);
             }
             //need to find the command
             it = this->commandTable.find(data[index]);
             CommandExpression *dataCommand;
             //check if exist
-            if(it != this->commandTable.end()){
-                 dataCommand = dynamic_cast<CommandExpression *>(it->second);
-            }else{
+            if (it != this->commandTable.end()) {
+                dataCommand = dynamic_cast<CommandExpression *>(it->second);
+            } else {
                 //its a var name
                 //need to go to the VarCommand
                 dataCommand = dynamic_cast<CommandExpression *>(this->commandTable.find(VAR)->second);
@@ -62,10 +61,7 @@ void Parser::parser(vector<string> data) {
 
             index += dataCommand->getCommand()->setParameters(data, index);
 
-            //todo return the do command
             dataCommand->calculate();
-
-            //todo need to check if everything entered
 
             //after everything run - can initilize the map
             commandTab->setMapValues();

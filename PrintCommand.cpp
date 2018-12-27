@@ -24,12 +24,12 @@ int PrintCommand::setParameters(vector<string> data, int index) {
         str = putSpaces(str);
         Expression * printExp = evaluate(str);
 
-        std::ostringstream strs;
-        strs << printExp->calculate();
-        std::string testStr = strs.str();
+//        std::ostringstream strs;
+//        strs << printExp->calculate();
+//        std::string testStr = strs.str();
 
-        this->printStr = testStr;
-      //  this->printStr = to_string(printExp->calculate());
+      //  this->printStr = testStr;
+        this->printStr = to_string(printExp->calculate());
     }
 
     //read the command name and the var of it - num of time for sleeping

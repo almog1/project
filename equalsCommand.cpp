@@ -44,19 +44,51 @@ void equalsCommand::doCommand() {
     //getting the path of the var
     string path = symbolTab->getVarPath(varTarget);
 
-
-
     string message = "set "+ path + " " + to_string(value) + "\r\n";
-    cout<<"THIS IS MESSAGE BEFORE SEND "+ message<<endl;
     //sending message to the simulator
-    sendMessage(message);
+   // sendMessage(message);
+   ThreadsendMessage(message);
+   //enter to the table
 }
 
+
+void equalsCommand::ThreadsendMessage(string str){
+    SymbolTable *table = SymbolTable::getInstance();
+    int sockfd = table->getClientId();
+    struct MyParams *params = new MyParams();
+    params->clientId = sockfd;
+    params->message = str;
+
+    pthread_t threadId;
+    pthread_create(&threadId, nullptr, sendMessage,params);
+    pthread_join(threadId, nullptr);
+}
+
+void* equalsCommand::sendMessage(void* arg) {
+    struct MyParams *params = (struct MyParams *) arg;
+    SymbolTable *table = SymbolTable::getInstance();
+    int sockfd = params->clientId;
+    string str = params->message;
+
+    char *s = const_cast<char *>(str.c_str());
+    //send message to the server
+
+    int n = ::write(sockfd, s, strlen(s));
+    if (n < 0) {
+        perror("Error writing to socket");
+        exit(1);
+    }
+
+    cout << str << endl;
+    cout << s << endl;
+}
+/*
 void equalsCommand::sendMessage(string str) {
     SymbolTable *table = SymbolTable::getInstance();
     int sockfd = table->getClientId();
     char *s = const_cast<char *>(str.c_str());
     //send message to the server
+
     int n = ::write(sockfd, s, strlen(s));
     if (n < 0) {
         perror("Error writing to socket");
@@ -68,3 +100,4 @@ void equalsCommand::sendMessage(string str) {
     cout << str << endl;
     cout << s << endl;
 }
+*/
