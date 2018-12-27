@@ -97,12 +97,19 @@ vector<string> Lexer(string fileName) {
 
             char last, first;
             bool lastOp = false, firstOp = false, lastIsDigit = false;
+            bool isQua = false;
 
             //split by " "
             while (getline(temp, segment, ' ')) {
                 last = segment[segment.length() - 1];
                 first = segment[0];
+
                 if (segment != "") {
+                    //check if its print - ""
+                    if (first == '"' && last != '"') {
+                        // data.push_back(segment + " ");
+                        isQua = true;
+                    }
                     //check if the last one was digit - for the '-'
 
                     //check if its operator - need to take the next one too
@@ -119,11 +126,12 @@ vector<string> Lexer(string fileName) {
                             //check if it - and there is '=' isn't in this line
                             if (first == '-' && !isEqualInLine) {
                                 //check if last is digit
-                                if(lastIsDigit){
+                                if (lastIsDigit) {
                                     data[data.size() - 1] = data[data.size() - 1] + segment;
-                                } else{
+                                } else {
                                     //need new place in the vector - not a continue of reg
-                                    data.push_back(segment);}
+                                    data.push_back(segment);
+                                }
                             } else {
                                 //here if equal in line - need to check if last one is '='
                                 if (latIsEqual) {
@@ -137,11 +145,12 @@ vector<string> Lexer(string fileName) {
                             if (firstOp) {
                                 if (first == '-' && !isEqualInLine) {
                                     //check if last is digit
-                                    if(lastIsDigit){
+                                    if (lastIsDigit) {
                                         data[data.size() - 1] = data[data.size() - 1] + segment;
-                                    } else{
+                                    } else {
                                         //need new place in the vector - not a continue of reg
-                                        data.push_back(segment);}
+                                        data.push_back(segment);
+                                    }
                                 } else {
                                     if (latIsEqual) {
                                         data.push_back(segment);
@@ -162,28 +171,40 @@ vector<string> Lexer(string fileName) {
                             }
                         }
                     } else {
-                        //check if end "("
-                        if (last == '(') {
-                            if (isInOp == true) {
-                                data[data.size() - 1] = data[data.size() - 1] + segment;
+                        if (isQua) {
+                            if (first == '"') {
+                                data.push_back(segment + " ");
+                            } else if (last != '"') {
+                                data[data.size() - 1] = data[data.size() - 1] + segment + " ";
                             } else {
-                                data.push_back(segment);
-                            }
-                            isInOp = true;
-                        } else {
-                            if (first == ')') {
                                 data[data.size() - 1] = data[data.size() - 1] + segment;
-                            }//else if(last == ')') {
-                                //nothing to do - regular
-                                //}
-                            else {
+                                isQua = false;
+                            }
+                        } else {
+                            //check if last was "
+                            //check if end "("
+                            if (last == '(') {
                                 if (isInOp == true) {
                                     data[data.size() - 1] = data[data.size() - 1] + segment;
                                 } else {
                                     data.push_back(segment);
                                 }
+                                isInOp = true;
+                            } else {
+                                if (first == ')') {
+                                    data[data.size() - 1] = data[data.size() - 1] + segment;
+                                }//else if(last == ')') {
+                                    //nothing to do - regular
+                                    //}
+                                else {
+                                    if (isInOp == true) {
+                                        data[data.size() - 1] = data[data.size() - 1] + segment;
+                                    } else {
+                                        data.push_back(segment);
+                                    }
+                                }
+                                isInOp = false;
                             }
-                            isInOp = false;
                         }
                     }
 

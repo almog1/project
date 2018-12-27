@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <sstream>
 #include "PrintCommand.h"
 #include "SymbolTable.h"
 
@@ -22,7 +23,13 @@ int PrintCommand::setParameters(vector<string> data, int index) {
         str = data[index+1];
         str = putSpaces(str);
         Expression * printExp = evaluate(str);
-        this->printStr = to_string(printExp->calculate());
+
+        std::ostringstream strs;
+        strs << printExp->calculate();
+        std::string testStr = strs.str();
+
+        this->printStr = testStr;
+      //  this->printStr = to_string(printExp->calculate());
     }
 
     //read the command name and the var of it - num of time for sleeping

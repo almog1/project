@@ -26,6 +26,7 @@ private:
     map<string, string> varPathTable;
     map<string, double> pathDouble;
     vector<string> names;
+    pthread_mutex_t *mutex;
 
 public:
     void setServerId(int serverId);

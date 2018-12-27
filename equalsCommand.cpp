@@ -25,10 +25,10 @@ int equalsCommand::setParameters(vector<string> data, int index) {
 
     this->varTarget = data[index];
     //take the first and second
-    //put spaces in the sleep string
+    //put spaces in the string
     string valStr = putSpaces(data[index + 1]);
     Expression *valExp = evaluate(valStr);
-    this->value = (int) (valExp->calculate());
+    this->value = (valExp->calculate());
 
     //read the command name and the var of it
     return 3;
@@ -43,7 +43,11 @@ void equalsCommand::doCommand() {
     symbolTab->addSymbolValue(varTarget, value);
     //getting the path of the var
     string path = symbolTab->getVarPath(varTarget);
+
+
+
     string message = "set "+ path + " " + to_string(value) + "\r\n";
+    cout<<"THIS IS MESSAGE BEFORE SEND "+ message<<endl;
     //sending message to the simulator
     sendMessage(message);
 }
@@ -59,6 +63,8 @@ void equalsCommand::sendMessage(string str) {
         exit(1);
     }
     cout << "SEND" << endl;
+    cout<<"THIS IS MESSAGE AFTER SEND "<<endl;
+
     cout << str << endl;
     cout << s << endl;
 }

@@ -23,7 +23,7 @@ int SleepCommand::setParameters(vector<string> data, int index) {
     //put spaces in the sleep string
     string sleepStr = putSpaces(data[index + 1]);
     Expression *sleepExp = evaluate(sleepStr);
-    this->sleepTime = (int) (sleepExp->calculate());
+    this->sleepTime = (sleepExp->calculate() / 1000);
 
     //read the command name and the var of it - num of time for sleeping
     return 2;

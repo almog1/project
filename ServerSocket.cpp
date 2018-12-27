@@ -37,6 +37,8 @@ void *ServerSocket::openSocket(void *arg) {
             perror("ERROR reading from socket");
             exit(1);
         }
+
+       // buff = buff.substr(1,buff.size()-2); //take out the quats
         // split each line it get from the file to list of separate strings
         vector<string> info;
         size_t pos = 0;

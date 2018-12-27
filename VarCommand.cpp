@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <sstream>
 #include "VarCommand.h"
 #include "OtherFunctions.h"
 #include "Expression.h"
@@ -11,6 +12,7 @@
 #include "CommandExpression.h"
 
 VarCommand::VarCommand() {
+    this->isBind = false;
 }
 
 int VarCommand::setParameters(vector<string> data, int index) {
@@ -40,6 +42,8 @@ int VarCommand::setParameters(vector<string> data, int index) {
                 throw "Not Enoght Args!";
             }
             this->path = data[index + 4].substr(1, data[index + 4].size() - 2);
+
+            cout<<"PUT IS BIND PATH " << this->path << endl;
 
             newIndex = 5;
         } else {
@@ -81,6 +85,8 @@ void VarCommand::doCommand() {
     SymbolTable *symbolTab = SymbolTable::getInstance();
     //update the maps and send a message to the simulator
     if (this->isBind) {
+        cout<<"ADD PATH TO TABLE " << this->path << endl;
+
         //insert the var name with its path
         symbolTab->addPathToVar(this->var, this->path);
         this->isBind=false;
@@ -89,6 +95,17 @@ void VarCommand::doCommand() {
         if (symbolTab->isValExist(this->var)) {
             //need to send a mess to the server about the chaning
             Command *equalsComm = new equalsCommand();
+
+            cout<<"CREATE EQUAL "<< this->val <<endl;
+            cout<<"CREATE EQUAL TO STRING "<< to_string(this->val) <<endl;
+
+//            std::ostringstream strs;
+//            strs << this->val;
+//            std::string testStr = strs.str();
+
+          //  cout<<"CREATE EQUAL TO STRING "<< to_string(this->val) <<endl;
+
+
             vector<string> params;
             params.push_back(this->var);
             params.push_back(to_string(this->val));
