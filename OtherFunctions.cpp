@@ -5,10 +5,14 @@
 #include "OtherFunctions.h"
 
 string putSpaces(string str) {
+    str = newStr(str);
     int i = 0;
     string newStr = "";
     newStr = str[0];
 
+    if (str[i] == '-') {
+        newStr = newStr + " ";
+    }
     //run on all the string and add spaces
     for (i = 1; i < str.length(); i++) {
         if (!isdigit(str[i]) && (str[i] != '.')) {
@@ -22,4 +26,23 @@ string putSpaces(string str) {
 
     }
     return newStr + ' ';
+}
+
+string newStr(string str) {
+    string afterChange = str;
+    string before = "";
+    string after = "";
+    for (int i = 0; i < str.size(); i++) {
+        if (i == 0 && str[0] == '-') {
+            afterChange = "0" + str;
+        }
+        if (str[i + 1] == '-') {
+            if (str[i] == '(' || str[i] == '+' || str[i] == '-' || str[i] == '*' || str[i] == '/') {
+                before = str.substr(0, i + 1);
+                after = str.substr(i + 1, str.size() - 1);
+                afterChange = before + "(0" + after + ")";
+            }
+        }
+    }
+    return afterChange;
 }
