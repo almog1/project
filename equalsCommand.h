@@ -31,6 +31,8 @@ public:
         string message;
     };
 
+    ~equalsCommand();
+
 };
 
 #endif //PROGECT_EQUALSCOMMAND_H

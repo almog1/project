@@ -119,3 +119,7 @@ bool IfCommand::checkIfCondition() {
         }
     }
 }
+
+IfCommand::~IfCommand() {
+
+}

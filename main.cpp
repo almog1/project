@@ -22,6 +22,6 @@ int main(int argc, char* argv[]) {
     vector<string> data = Lexer(fileName);
     Parser* parserRun = new Parser();
     parserRun->parser(data);
-
+    delete parserRun;
     pthread_exit(NULL);
 }

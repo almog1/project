@@ -32,6 +32,8 @@ public:
      * @return the command
      */
     Command *getCommand() const;
+
+    ~CommandExpression();
 };
 
 

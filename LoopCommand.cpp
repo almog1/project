@@ -137,4 +137,7 @@ bool LoopCommand::checkCondition() {
         }
     }
 }
-//bool checkCondition()
+
+LoopCommand::~LoopCommand() {
+
+}

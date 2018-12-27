@@ -99,3 +99,7 @@ void equalsCommand::sendMessage(string str) {
     cout << s << endl;
 }
 */
+
+equalsCommand::~equalsCommand() {
+
+}

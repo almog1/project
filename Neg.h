@@ -22,6 +22,8 @@ public:
      * @return the calculation of the expression
      */
     double calculate() override;
+
+    ~Neg();
 };
 
 #endif //PROGECT_NEG_H

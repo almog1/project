@@ -66,6 +66,8 @@ public:
     bool isServer() const;
 
     void setServer(bool server);
+
+    ~SymbolTable();
 };
 
 #endif //PROGECT_SYMBOLTABLE_H

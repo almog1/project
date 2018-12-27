@@ -17,4 +17,6 @@ double Number::calculate() {
     return this->value;
 }
 
+Number::~Number() {
 
+}

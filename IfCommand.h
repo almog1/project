@@ -23,6 +23,8 @@ public:
     int createCommands(vector<string> data, int index);
 
     bool checkIfCondition();
+
+    ~IfCommand();
 };
 
 #endif //PROGECT_IFCOMMAND_H

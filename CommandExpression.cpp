@@ -25,3 +25,7 @@ CommandExpression::CommandExpression(Command *command) : command(command) {}
 Command *CommandExpression::getCommand() const {
     return command;
 }
+
+CommandExpression::~CommandExpression() {
+    delete this->command;
+}

@@ -38,6 +38,8 @@ public:
         string ip;
         int port;
     };
+
+    ~ConnectCommand();
 };
 
 #endif //PROGECT_CONNECTCOMMAND_H

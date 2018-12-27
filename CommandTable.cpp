@@ -97,6 +97,7 @@ CommandTable::~CommandTable() {
             delete exp;
         }
     }
+    delete instance;
 }
 
 /**

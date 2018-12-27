@@ -24,7 +24,7 @@ Parser::Parser() {
 }
 
 Parser::~Parser() {
-
+    delete &this->commandTable;
 }
 
 void Parser::parser(vector<string> data) {

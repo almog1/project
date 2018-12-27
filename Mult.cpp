@@ -17,3 +17,7 @@ double Mult::calculate() {
  * build a mult expression with right and left side
  */
 Mult::Mult(Expression *leftExp, Expression *rightExp) : BinaryExpression(leftExp, rightExp) {}
+
+Mult::~Mult() {
+
+}

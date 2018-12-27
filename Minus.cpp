@@ -18,3 +18,6 @@ double Minus::calculate() {
  */
 Minus::Minus(Expression *leftExp, Expression *rightExp) : BinaryExpression(leftExp, rightExp) {}
 
+Minus::~Minus() {
+
+}

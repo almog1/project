@@ -39,3 +39,7 @@ Var::Var(const string &name, const string &path, double value) : name(name), pat
 Var::Var(const string &name) : name(name) {
 
 }
+
+Var::~Var() {
+
+}

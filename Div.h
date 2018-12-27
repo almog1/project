@@ -27,6 +27,8 @@ public:
      * @return the calclation of the div expression
      */
     double calculate() override;
+
+    ~Div();
 };
 
 #endif //PROGECT_DIV_H

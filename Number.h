@@ -25,6 +25,8 @@ public:
      * @return the value of the number
      */
     double calculate() override;
+
+    ~Number();
 };
 
 #endif //PROGECT_NUMBER_H

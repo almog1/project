@@ -210,3 +210,6 @@ void SymbolTable::setServer(bool server) {
     SymbolTable::server = server;
 }
 
+SymbolTable::~SymbolTable() {
+    delete instance;
+}

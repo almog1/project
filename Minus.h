@@ -25,5 +25,7 @@ public:
      * @return the calclation of the minus expression
      */
     double calculate() override;
+
+    ~Minus();
 };
 #endif //PROGECT_MINUS_H

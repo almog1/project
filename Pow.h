@@ -13,5 +13,6 @@ public:
 
 public:
     Pow(Expression *leftExp, Expression *rightExp);
+    ~Pow();
 };
 #endif //PROGECT_POW_H

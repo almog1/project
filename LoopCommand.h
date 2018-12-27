@@ -24,6 +24,8 @@ public:
     int createLoop(vector<string> data, int index);
 
     bool checkCondition();
+
+    ~LoopCommand();
 };
 
 #endif //PROGECT_LOOPCOMMAND_H

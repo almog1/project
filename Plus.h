@@ -25,7 +25,7 @@ public:
      */
     double calculate() override;
 
-
+    ~Plus();
 };
 
 #endif //PROGECT_PLUS_H

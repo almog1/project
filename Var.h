@@ -34,6 +34,8 @@ public:
     double getValue() const;
 
     double calculate() override;
+
+    ~Var();
 };
 
 #endif //PROGECT_VAR_H

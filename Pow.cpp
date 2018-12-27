@@ -9,3 +9,7 @@ Pow::Pow(Expression *leftExp, Expression *rightExp) : BinaryExpression(leftExp, 
 double Pow::calculate() {
     return (pow(this->getLeftExp()->calculate(),this->getRightExp()->calculate()));
 }
+
+Pow::~Pow() {
+
+}

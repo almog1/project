@@ -17,3 +17,7 @@ Div::Div(Expression *leftExp, Expression *rightExp) : BinaryExpression(leftExp, 
 double Div::calculate() {
     return (this->getLeftExp()->calculate() / this->getRightExp()->calculate());
 }
+
+Div::~Div() {
+
+}

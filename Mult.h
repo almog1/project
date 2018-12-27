@@ -28,5 +28,7 @@ public:
      * @return the calclation of the mult expression
      */
     double calculate() override;
+
+    ~Mult();
 };
 #endif //PROGECT_MULT_H

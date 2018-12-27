@@ -9,6 +9,10 @@
 Plus::Plus(Expression *leftExp, Expression *rightExp) : BinaryExpression(leftExp, rightExp) {
 }
 
+Plus::~Plus() {
+
+}
+
 /**
  *
  * @param symbolTable the table that contains all the variables
