@@ -3,7 +3,7 @@
 #include "OpenDataServer.h"
 #include "Parser.h"
 #include "Expression.h"
-#include "expressionDetect.h"
+#include "ExpressionDetect.h"
 #include "OtherFunctions.h"
 #include "SymbolTable.h"
 
@@ -56,15 +56,15 @@ void OpenDataServer::doCommand() {
  */
 int OpenDataServer::setParameters(vector<string> data, int index) {
     SymbolTable *symbolTab = SymbolTable::getInstance();
-
+    ExpressionDetect*expressionDetect;
     //take the first and second
     //put spaces in the port string
     string portStr = putSpaces(data[index + 1]);
-    Expression *portExp = evaluate(portStr);
+    Expression *portExp = expressionDetect->evaluate(portStr);
     this->port = (int) (portExp->calculate());
 
     string hzStr = putSpaces(data[index + 2]);
-    Expression *hzExp = evaluate(hzStr);
+    Expression *hzExp = expressionDetect->evaluate(hzStr);
     this->hz = (int) (hzExp->calculate());
 
     //read the command name and two arguments

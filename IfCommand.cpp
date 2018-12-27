@@ -5,15 +5,16 @@
 #include "IfCommand.h"
 #include "CommandTable.h"
 #include "OtherFunctions.h"
-#include "expressionDetect.h"
+#include "ExpressionDetect.h"
 
 int IfCommand::setParameters(vector<string> data, int index) {
+    ExpressionDetect* expressionDetect;
     int newIndex = 5;
     string leftCondition = putSpaces(data[index + 1]);
-    this->leftExp = evaluate(leftCondition); //just make the expression and save it to member
+    this->leftExp = expressionDetect->evaluate(leftCondition); //just make the expression and save it to member
 
     string rightCond = putSpaces(data[index + 3]);
-    this->rightExp = evaluate(rightCond); // just take the expression and save as member
+    this->rightExp = expressionDetect->evaluate(rightCond); // just take the expression and save as member
 
     //save the condition
     this->condition = data[index + 2];

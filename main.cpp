@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "ExpressionHeaders.h"
-#include "expressionDetect.h"
+#include "ExpressionDetect.h"
 #include "Reader.h"
 #include "Parser.h"
 #include "OtherFunctions.h"

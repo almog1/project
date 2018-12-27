@@ -7,7 +7,7 @@
 #include <iostream>
 #include "equalsCommand.h"
 #include "OtherFunctions.h"
-#include "expressionDetect.h"
+#include "ExpressionDetect.h"
 
 
 /**
@@ -26,8 +26,9 @@ int equalsCommand::setParameters(vector<string> data, int index) {
     this->varTarget = data[index];
     //take the first and second
     //put spaces in the string
+    ExpressionDetect* expressionDetect;
     string valStr = putSpaces(data[index + 1]);
-    Expression *valExp = evaluate(valStr);
+    Expression *valExp = expressionDetect->evaluate(valStr);
     this->value = (valExp->calculate());
 
     //read the command name and the var of it

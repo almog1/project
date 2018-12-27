@@ -19,6 +19,7 @@ VarCommand::VarCommand() {
 int VarCommand::setParameters(vector<string> data, int index) {
     int newIndex = 0;
     string varName = "";
+    ExpressionDetect *expressionDetect;
     //check if first is Var
     if (data[index] == "var") {
         //get the vector when index is on the string "var"
@@ -46,12 +47,12 @@ int VarCommand::setParameters(vector<string> data, int index) {
 
             newIndex = 5;
         } else {
-           // this->isBind = false;
+            // this->isBind = false;
             //other var name
             double value;
             //if it can be an expression
             string val = putSpaces(data[index + 3]);
-            Expression *valExp = evaluate(val);
+            Expression *valExp = expressionDetect->evaluate(val);
 
             this->val = valExp->calculate();
 
@@ -71,7 +72,7 @@ int VarCommand::setParameters(vector<string> data, int index) {
         }
         //if it can be an expression
         string val = putSpaces(data[index + 2]);
-        Expression *valExp = evaluate(val);
+        Expression *valExp = expressionDetect->evaluate(val);
         this->val = valExp->calculate();
         //take the expression value
 
@@ -87,7 +88,7 @@ void VarCommand::doCommand() {
 
         //insert the var name with its path
         symbolTab->addPathToVar(this->var, this->path);
-        this->isBind=false;
+        this->isBind = false;
     } else {
         //check if the varName exist in the map 'var-path'
         if (symbolTab->isValExist(this->var)) {
@@ -112,7 +113,7 @@ void VarCommand::doCommand() {
 }
 
 VarCommand::~VarCommand() {
-    if(this->isCommandExist){
-        delete(this->command);
+    if (this->isCommandExist) {
+        delete (this->command);
     }
 }

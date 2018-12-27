@@ -18,11 +18,12 @@ SleepCommand::SleepCommand() {
  */
 int SleepCommand::setParameters(vector<string> data, int index) {
     SymbolTable *symbolTab = SymbolTable::getInstance();
+    ExpressionDetect*expressionDetect;
 
     //take the first and second
     //put spaces in the sleep string
     string sleepStr = putSpaces(data[index + 1]);
-    Expression *sleepExp = evaluate(sleepStr);
+    Expression *sleepExp = expressionDetect->evaluate(sleepStr);
     this->sleepTime = (sleepExp->calculate() / 1000);
 
     //read the command name and the var of it - num of time for sleeping

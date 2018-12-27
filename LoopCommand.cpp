@@ -9,18 +9,17 @@
 //#include "CommandTable.h"
 
 int LoopCommand::setParameters(vector<string> data, int index) {
-//    CommandTable* commadTab = CommandTable::getInstance();
-    //  map<string, Expression*> commandTable = commadTab->getTable();
-    //check what is the condition
 
     int newIndex = 5;
     //todo - make sure enough arguments
     //date[index] = while
+
+    ExpressionDetect* expressionDetect;
     string leftCondition = putSpaces(data[index + 1]);
-    this->leftExp = evaluate(leftCondition); //just make the expression and save it to member
+    this->leftExp = expressionDetect->evaluate(leftCondition); //just make the expression and save it to member
 
     string rightCond = putSpaces(data[index + 3]);
-    this->rightExp = evaluate(rightCond); // just take the expression and save as member
+    this->rightExp = expressionDetect->evaluate(rightCond); // just take the expression and save as member
 
     //save the condition
     this->condition = data[index + 2];

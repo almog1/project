@@ -1,11 +1,11 @@
 
 #include <string>
 #include <stack>
-#include "expressionDetect.h"
+#include "ExpressionDetect.h"
 
 
 // Function to perform arithmetic operations.
-Expression *applyOp(Expression *a, Expression *b, char op) {
+Expression *ExpressionDetect::applyOp(Expression *a, Expression *b, char op) {
     switch (op) {
         case '+':
             return (new Plus(a, b));
@@ -20,7 +20,7 @@ Expression *applyOp(Expression *a, Expression *b, char op) {
 
 // Function to find precedence of
 // operators.
-int precedence(char op) {
+int ExpressionDetect::precedence(char op) {
     if (op == '+' || op == '-')
         return 1;
     if (op == '*' || op == '/')
@@ -30,7 +30,7 @@ int precedence(char op) {
 
 // Function that returns value of
 // expression after evaluation.
-Expression *evaluate(string tokens) {
+Expression *ExpressionDetect::evaluate(string tokens) {
     int i;
 
     // stack to store integer values.
@@ -153,3 +153,8 @@ Expression *evaluate(string tokens) {
     return values.top();
 }
 
+ExpressionDetect::~ExpressionDetect() {
+
+}
+
+ExpressionDetect::ExpressionDetect() {}

@@ -7,7 +7,7 @@
 
 #include "Command.h"
 #include "ExpressionHeaders.h"
-#include "expressionDetect.h"
+#include "ExpressionDetect.h"
 #include "ExpressionHeaders.h"
 #include "OtherFunctions.h"
 #include "unistd.h"

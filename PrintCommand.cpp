@@ -12,7 +12,7 @@ PrintCommand::PrintCommand() {
 
 int PrintCommand::setParameters(vector<string> data, int index) {
     SymbolTable *symbolTab = SymbolTable::getInstance();
-
+    ExpressionDetect*expressionDetect;
     string str;
     //take the first and second
     //check if string
@@ -22,7 +22,7 @@ int PrintCommand::setParameters(vector<string> data, int index) {
         //expression
         str = data[index+1];
         str = putSpaces(str);
-        Expression * printExp = evaluate(str);
+        Expression * printExp = expressionDetect->evaluate(str);
 
 //        std::ostringstream strs;
 //        strs << printExp->calculate();

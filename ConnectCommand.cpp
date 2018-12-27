@@ -5,7 +5,7 @@
 #include "ConnectCommand.h"
 #include "Expression.h"
 #include "Parser.h"
-#include "expressionDetect.h"
+#include "ExpressionDetect.h"
 #include "OtherFunctions.h"
 #include "ClientSocket.h"
 #include "SymbolTable.h"
@@ -42,11 +42,10 @@ ConnectCommand::ConnectCommand() {
  * @return how much we need to move on the array (the num of values for a specific command)
  */
 int ConnectCommand::setParameters(vector<string> data, int index) {
-    SymbolTable * symbolTab = SymbolTable::getInstance();
-
     this->ip = data[index + 1];
+    ExpressionDetect* expressionDetect;
     string portStr = putSpaces(data[index + 2]);
-    Expression *portExp = evaluate(portStr);
+    Expression *portExp = expressionDetect->evaluate(portStr);
     this->port = (int) (portExp->calculate());
 
     //read connect command name and two arguments
@@ -57,7 +56,7 @@ int ConnectCommand::setParameters(vector<string> data, int index) {
  * run the connect command
  */
 void ConnectCommand::doCommand() {
-    SymbolTable*table=SymbolTable::getInstance();
+    SymbolTable *table = SymbolTable::getInstance();
     table->setConnect(false);
     struct MyParams *params = new MyParams();
     params->port = this->port;
