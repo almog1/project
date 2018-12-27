@@ -21,7 +21,7 @@ using namespace std;
  * opens the server
  */
 class ServerSocket {
-    bool isConnect;
+    //static bool running;
 public:
     static void *openSocket(void *arg);
 };

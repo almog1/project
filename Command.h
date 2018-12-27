@@ -32,6 +32,8 @@ public:
      * the function that runs the command we want
      */
     virtual void doCommand() = 0;
+
+   // virtual ~Command();
 };
 
 #endif //PROGECT_COMMAND_H

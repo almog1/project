@@ -79,8 +79,6 @@ void* equalsCommand::sendMessage(void* arg) {
         exit(1);
     }
 
-    cout << str << endl;
-    cout << s << endl;
 }
 /*
 void equalsCommand::sendMessage(string str) {

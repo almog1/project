@@ -43,7 +43,7 @@ void OpenDataServer::doCommand() {
     params->hz = this->hz;
 
     open();
-    std::cout << "got here" << endl;
+   // std::cout << "got here" << endl;
     pthread_t id;
     pthread_create(&id, nullptr, ServerSocket::openSocket, params);
 }
@@ -110,7 +110,7 @@ void OpenDataServer::open() {
     newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, (socklen_t *) &clilen);
     SymbolTable *symbolTable = SymbolTable::getInstance();
     symbolTable->setServerId(newsockfd);
-    cout << "hii" << endl;
+    //cout << "hii" << endl;
 
     if (newsockfd < 0) {
         perror("ERROR on accept");

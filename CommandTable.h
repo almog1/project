@@ -24,6 +24,8 @@ private:
 public:
     CommandTable();
 
+    ~CommandTable();
+
     static CommandTable *getInstance();
 
     void addValue(string commandName, Expression *exp);

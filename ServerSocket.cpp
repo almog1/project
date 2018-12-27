@@ -17,7 +17,7 @@ struct MyParams {
 
 void *ServerSocket::openSocket(void *arg) {
     char buffer[1024];
-
+    bool running = true;
     //if connections is established then start communicating
     bzero(buffer, 1024);
     SymbolTable *symbolTab = SymbolTable::getInstance();
@@ -29,13 +29,14 @@ void *ServerSocket::openSocket(void *arg) {
     SymbolTable *table = SymbolTable::getInstance();
     vector<string> paths = table->getNames();
     //sleep fot this->hz
-    while (true) {
+    while (running) {
 
         bzero(buffer, 256);
         n = read(table->getServerId(), buffer, 255);
         if (n < 0) {
             perror("ERROR reading from socket");
-            exit(1);
+            running = false;
+           // exit(1);
         }
 
        // buff = buff.substr(1,buff.size()-2); //take out the quats
@@ -68,5 +69,7 @@ void *ServerSocket::openSocket(void *arg) {
         leftOvers = "";
 
     }
+
+    //todo - maybe close thread ?
 //    table->setServer(true);
 }

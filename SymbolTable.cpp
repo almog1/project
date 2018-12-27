@@ -84,7 +84,8 @@ void SymbolTable::addPathToVar(string varName, string path) {
         //if not exist - need to add the pair
         this->varPathTable.insert(pair<string, string>(varName, path));
     }
-    cout << "Added to path var " << this->varPathTable[varName] << endl;
+
+    //cout << "Added to path var " << this->varPathTable[varName] << endl;
 }
 
 void SymbolTable::addValueByPathIndex(int index, double val) {
@@ -113,7 +114,7 @@ void SymbolTable::setValuesInSymbolTable() {
     double val;
 
     pthread_mutex_lock(&mutex);
-    cout << "VALUES IN MAP FUNCTION" << endl;
+    //cout << "VALUES IN MAP FUNCTION" << endl;
     if (this->varPathTable.empty() == false) {
         for (it = this->varPathTable.begin(); it != this->varPathTable.end(); ++it) {
             varName = it->first;

@@ -90,6 +90,15 @@ CommandTable *CommandTable::getInstance() {
     return instance;
 }
 
+CommandTable::~CommandTable() {
+    //delte all expressions
+    if (this->allExp.empty() == false) {
+        for (auto &&exp : this->allExp) {
+            delete exp;
+        }
+    }
+}
+
 /**
  *
  * @return the command table
