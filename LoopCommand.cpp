@@ -39,7 +39,6 @@ void LoopCommand::doCommand() {
         int i = 0;
 
         //for test
-        cout << i + 1 << "LOOP TIME" << endl;
         //todo - delete the test
 
         for (int i = 0; i < this->commands.size(); i++) {
