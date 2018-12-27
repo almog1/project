@@ -47,12 +47,12 @@ void equalsCommand::doCommand() {
 
     string message = "set "+ path + " " + to_string(value) + "\r\n";
     //sending message to the simulator
-   // sendMessage(message);
-   ThreadsendMessage(message);
+    sendMessage(message);
+ //  ThreadsendMessage(message);
    //enter to the table
 }
 
-
+/*
 void equalsCommand::ThreadsendMessage(string str){
     SymbolTable *table = SymbolTable::getInstance();
     int sockfd = table->getClientId();
@@ -63,8 +63,8 @@ void equalsCommand::ThreadsendMessage(string str){
     pthread_t threadId;
     pthread_create(&threadId, nullptr, sendMessage,params);
     pthread_join(threadId, nullptr);
-}
-
+}*/
+/*
 void* equalsCommand::sendMessage(void* arg) {
     struct MyParams *params = (struct MyParams *) arg;
     SymbolTable *table = SymbolTable::getInstance();
@@ -80,8 +80,9 @@ void* equalsCommand::sendMessage(void* arg) {
         exit(1);
     }
 
-}
-/*
+}*/
+
+
 void equalsCommand::sendMessage(string str) {
     SymbolTable *table = SymbolTable::getInstance();
     int sockfd = table->getClientId();
@@ -93,13 +94,8 @@ void equalsCommand::sendMessage(string str) {
         perror("Error writing to socket");
         exit(1);
     }
-    cout << "SEND" << endl;
-    cout<<"THIS IS MESSAGE AFTER SEND "<<endl;
-
-    cout << str << endl;
-    cout << s << endl;
 }
-*/
+
 
 equalsCommand::~equalsCommand() {
 
