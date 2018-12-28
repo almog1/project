@@ -13,8 +13,9 @@
 class VarCommand : public Command {
     bool isBind;
     string var;
-    double val;
+    Expression* val;
     string path;
+    string valStr;
 
     bool isCommandExist;
     Command* command;

@@ -54,7 +54,7 @@ int VarCommand::setParameters(vector<string> data, int index) {
             string val = putSpaces(data[index + 3]);
             Expression *valExp = expressionDetect->evaluate(val);
 
-            this->val = valExp->calculate();
+            this->val = valExp;
 
             //if it will be just name of var - it will take it from the map and return its value there
             //need to put its value in string value
@@ -71,9 +71,12 @@ int VarCommand::setParameters(vector<string> data, int index) {
             throw "Should be '=' here!";
         }
         //if it can be an expression
+        this->valStr = data[index + 2];
+        //this->valStr = putSpaces(this->valStr);
+
         string val = putSpaces(data[index + 2]);
         Expression *valExp = expressionDetect->evaluate(val);
-        this->val = valExp->calculate();
+        this->val = valExp;
         //take the expression value
 
         newIndex = 3;
@@ -100,13 +103,13 @@ void VarCommand::doCommand() {
 
             vector<string> params;
             params.push_back(this->var);
-            params.push_back(to_string(this->val));
+            params.push_back(this->valStr);
             equalsComm->setParameters(params, 0);
             equalsComm->doCommand();
 
         } else {
             //update the symbol table
-            symbolTab->addSymbolValue(this->var, this->val);
+            symbolTab->addSymbolValue(this->var, this->val->calculate());
         }
     }
 

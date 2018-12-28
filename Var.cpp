@@ -29,6 +29,7 @@ void Var::setValue(double value) {
 
 double Var::calculate() {
     SymbolTable *symbolTable = SymbolTable::getInstance();
+    //cout<<"in value calc"<<endl;
     return symbolTable->getValue(this->name);
 }
 

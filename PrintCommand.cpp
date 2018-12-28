@@ -12,24 +12,22 @@ PrintCommand::PrintCommand() {
 
 int PrintCommand::setParameters(vector<string> data, int index) {
     SymbolTable *symbolTab = SymbolTable::getInstance();
-    ExpressionDetect*expressionDetect;
+    this->isString = false;
     string str;
     //take the first and second
     //check if string
-    if(data[index+1].at(0) == '"'){
-        this->printStr = data[index + 1].substr(1,data[index+1].size()-2);
-    }else{
+    if (data[index + 1].at(0) == '"') {
+        this->printStr = data[index + 1].substr(1, data[index + 1].size() - 2);
+        this->isString = true;
+    } else {
+        this->isString = false;
         //expression
-        str = data[index+1];
-        str = putSpaces(str);
-        Expression * printExp = expressionDetect->evaluate(str);
-
+        this->printStr = data[index + 1];
 //        std::ostringstream strs;
 //        strs << printExp->calculate();
 //        std::string testStr = strs.str();
 
-      //  this->printStr = testStr;
-        this->printStr = to_string(printExp->calculate());
+        //  this->printStr = testStr;
     }
 
     //read the command name and the var of it - num of time for sleeping
@@ -37,5 +35,11 @@ int PrintCommand::setParameters(vector<string> data, int index) {
 }
 
 void PrintCommand::doCommand() {
+    if(this->isString == false){
+        ExpressionDetect * expressionDetect;
+        string str = putSpaces(this->printStr);
+        Expression *printExp = expressionDetect->evaluate(str);
+        this->printStr = to_string(printExp->calculate());
+    }
     cout << this->printStr << endl;
 }

@@ -22,6 +22,7 @@ using namespace std;
  */
 class PrintCommand : public Command {
     string printStr;
+    bool isString;
 
 public:
     PrintCommand();

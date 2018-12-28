@@ -12,6 +12,7 @@ class equalsCommand : public Command {
     string ip;
     string varTarget;
     double value;
+    string valStr;
 
 public:
     equalsCommand();

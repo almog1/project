@@ -89,6 +89,7 @@ void SymbolTable::addPathToVar(string varName, string path) {
 }
 
 void SymbolTable::addValueByPathIndex(int index, double val) {
+    pthread_mutex_lock(&mutex);
 
     //take the name in this place
     string path = this->names[index];
@@ -104,6 +105,7 @@ void SymbolTable::addValueByPathIndex(int index, double val) {
         //if not exist - need to add the pair
         this->pathDouble.insert(pair<string, double>(path, val));
     }
+    pthread_mutex_unlock(&mutex);
 
 }
 
