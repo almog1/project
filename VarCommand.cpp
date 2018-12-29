@@ -72,7 +72,7 @@ int VarCommand::setParameters(vector<string> data, int index) {
         }
         //if it can be an expression
         this->valStr = data[index + 2];
-        //this->valStr = putSpaces(this->valStr);
+       // this->valStr = putSpaces(this->valStr);
 
         string val = putSpaces(data[index + 2]);
         Expression *valExp = expressionDetect->evaluate(val);

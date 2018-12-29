@@ -35,11 +35,12 @@ int PrintCommand::setParameters(vector<string> data, int index) {
 }
 
 void PrintCommand::doCommand() {
-    if(this->isString == false){
-        ExpressionDetect * expressionDetect;
+    if (this->isString == false) {
+        ExpressionDetect *expressionDetect;
         string str = putSpaces(this->printStr);
         Expression *printExp = expressionDetect->evaluate(str);
-        this->printStr = to_string(printExp->calculate());
+        cout << printExp->calculate() << endl;
+    } else {
+        cout << this->printStr << endl;
     }
-    cout << this->printStr << endl;
 }

@@ -29,7 +29,7 @@ int equalsCommand::setParameters(vector<string> data, int index) {
 //    ExpressionDetect* expressionDetect;
 //    string valStr = putSpaces(data[index + 1]);
 //    Expression *valExp = expressionDetect->evaluate(valStr);
-    //this->value = stod(data[index+1]);
+    //this->value = (data[index+1]);
     this->valStr = data[index+1];
     //read the command name and the var of it
     return 3;
@@ -43,21 +43,23 @@ void equalsCommand::doCommand() {
     string valS = putSpaces(this->valStr);
     ExpressionDetect* exp;
     Expression* expVal = exp->evaluate(valS);
-    value = expVal->calculate();
-    //update the value in the symbol map
-    symbolTab->addSymbolValue(varTarget, value);
+    double val = expVal->calculate();
+//    //update the value in the symbol map
+
+    symbolTab->addSymbolValue(varTarget, val);
+
     //getting the path of the var
     string path = symbolTab->getVarPath(varTarget);
 
-    string message = "set "+ path + " " + to_string(value) + "\r\n";
+    string message = "set "+ path + " " + to_string(val) + "\r\n";
     //sending message to the simulator
-    sendMessage(message);
-   // cout<<message<<endl;
- //  ThreadsendMessage(message);
+   // sendMessage(message);
+    ThreadsendMessage(message);
+
+    //cout<<message<<endl;
    //enter to the table
 }
 
-/*
 void equalsCommand::ThreadsendMessage(string str){
     SymbolTable *table = SymbolTable::getInstance();
     int sockfd = table->getClientId();
@@ -68,8 +70,8 @@ void equalsCommand::ThreadsendMessage(string str){
     pthread_t threadId;
     pthread_create(&threadId, nullptr, sendMessage,params);
     pthread_join(threadId, nullptr);
-}*/
-/*
+}
+
 void* equalsCommand::sendMessage(void* arg) {
     struct MyParams *params = (struct MyParams *) arg;
     SymbolTable *table = SymbolTable::getInstance();
@@ -85,22 +87,21 @@ void* equalsCommand::sendMessage(void* arg) {
         exit(1);
     }
 
-}*/
-
-
-void equalsCommand::sendMessage(string str) {
-    SymbolTable *table = SymbolTable::getInstance();
-    int sockfd = table->getClientId();
-    char *s = const_cast<char *>(str.c_str());
-    //send message to the server
-
-    int n = ::write(sockfd, s, strlen(s));
-    if (n < 0) {
-        perror("Error writing to socket");
-        exit(1);
-    }
 }
-
+//
+//void equalsCommand::sendMessage(string str) {
+//    SymbolTable *table = SymbolTable::getInstance();
+//    int sockfd = table->getClientId();
+//    char *s = const_cast<char *>(str.c_str());
+//    //send message to the server
+//
+//    int n = ::write(sockfd, s, strlen(s));
+//    if (n < 0) {
+//        perror("Error writing to socket");
+//        exit(1);
+//    }
+//}
+//
 
 equalsCommand::~equalsCommand() {
 

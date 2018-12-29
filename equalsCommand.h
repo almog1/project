@@ -17,20 +17,20 @@ class equalsCommand : public Command {
 public:
     equalsCommand();
 
-    void sendMessage(string str);
+  //  void sendMessage(string str);
 
-    //static void *sendMessage(void* arg);
+    static void *sendMessage(void* arg);
 
     int setParameters(vector<string> data, int index) override;
 
     void doCommand() override;
 
- //   void ThreadsendMessage(string str);
+    void ThreadsendMessage(string str);
 
-  /*  struct MyParams {
+    struct MyParams {
         int clientId;
         string message;
-    };*/
+    };
 
     ~equalsCommand();
 
