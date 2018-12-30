@@ -27,5 +27,5 @@ Command *CommandExpression::getCommand() const {
 }
 
 CommandExpression::~CommandExpression() {
-    delete this->command;
+    delete &this->command;
 }

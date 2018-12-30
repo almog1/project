@@ -39,7 +39,10 @@ void PrintCommand::doCommand() {
         ExpressionDetect *expressionDetect;
         string str = putSpaces(this->printStr);
         Expression *printExp = expressionDetect->evaluate(str);
-        cout << printExp->calculate() << endl;
+        std::ostringstream strs;
+        strs << printExp->calculate();
+        std::string testStr = strs.str();
+        cout << testStr << endl;
     } else {
         cout << this->printStr << endl;
     }

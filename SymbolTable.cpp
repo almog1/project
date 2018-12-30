@@ -21,7 +21,7 @@ SymbolTable::SymbolTable() {
                    "/instrumentation/gps/indicated-ground-speed-kt",
                    "/instrumentation/gps/indicated-vertical-speed",
                    "/instrumentation/heading-indicator/indicated-heading-deg",
-                   "/instrumentation/magnetic-compass/indicated-heading-deg",
+                   "/instrumentation/heading-indicator/indicated-heading-deg",
                    "/instrumentation/slip-skid-ball/indicated-slip-skid",
                    "/instrumentation/turn-indicator/indicated-turn-rate",
                    "/instrumentation/vertical-speed-indicator/indicated-speed-fpm",
@@ -43,28 +43,47 @@ SymbolTable *SymbolTable::getInstance() {
 void SymbolTable::addSymbolValue(string varName, double value) {
     //check if already in map - change its value
     //else- insert as pair
-    pthread_mutex_lock(&mutex);
-    map<string, double>::iterator it;
-    it = this->symbolTable.find(varName);
 
-    if (it != this->symbolTable.end()) {
-        //exist - need to update the value
-        this->symbolTable[varName] = value;
-    } else {
-        //if not exist - need to add the pair
-        this->symbolTable.insert(pair<string, double>(varName, value));
+    //check if have path
+    map<string, string>::iterator it;
+    it = this->varPathTable.find(varName);
+    //have path - take from pathDouble
+    if (it != this->varPathTable.end()) {
+        pthread_mutex_lock(&mutex);
+        this->pathDouble[it->second] = value;
+        pthread_mutex_unlock(&mutex);
+    }else{
+        //not have path
+        //put in symbol table
+        map<string, double>::iterator iter;
+        iter = this->symbolTable.find(varName);
+        if(iter!=this->symbolTable.end()){
+            this->symbolTable[varName] = value;
+        }else{
+            //if not exist - need to add the pair
+            this->symbolTable.insert(pair<string, double>(varName, value));
+        }
     }
-    pthread_mutex_unlock(&mutex);
+
 }
 
 //return the value of this var
 double SymbolTable::getValue(string varName) {
+    double num;
     pthread_mutex_lock(&mutex);
 
-    double num = this->symbolTable.find(varName)->second;
+    //check if it in have path
+    map<string, string>::iterator it;
+    it = this->varPathTable.find(varName);
+    //have path - take from pathDouble
+    if (it != this->varPathTable.end()) {
+        num = this->pathDouble[it->second];
+    }else{
+        //not from the var path - need from symbol table
+        num = this->symbolTable.find(varName)->second;
+    }
     //return the value of this var Name
     pthread_mutex_unlock(&mutex);
-
     return num;
 }
 
@@ -89,15 +108,13 @@ void SymbolTable::addPathToVar(string varName, string path) {
 }
 
 void SymbolTable::addValueByPathIndex(int index, double val) {
-    pthread_mutex_lock(&mutex);
-
     //take the name in this place
     string path = this->names[index];
 
     //check if the path exist
     map<string, double>::iterator it;
     it = this->pathDouble.find(path);
-
+    pthread_mutex_lock(&mutex);
     if (it != this->pathDouble.end()) {
         //exist - need to update the value
         this->pathDouble[path] = val;
@@ -105,7 +122,7 @@ void SymbolTable::addValueByPathIndex(int index, double val) {
         //if not exist - need to add the pair
         this->pathDouble.insert(pair<string, double>(path, val));
     }
-    pthread_mutex_unlock(&mutex);
+   pthread_mutex_unlock(&mutex);
 
 }
 
@@ -115,7 +132,6 @@ void SymbolTable::setValuesInSymbolTable() {
     string varPath = "";
     double val;
 
-    pthread_mutex_lock(&mutex);
     //cout << "VALUES IN MAP FUNCTION" << endl;
     if (this->varPathTable.empty() == false) {
         for (it = this->varPathTable.begin(); it != this->varPathTable.end(); ++it) {
@@ -142,7 +158,6 @@ void SymbolTable::setValuesInSymbolTable() {
             }
         }
     }
-    pthread_mutex_unlock(&mutex);
     //it->first << " => " << it->second << '\n';
 }
 

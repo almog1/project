@@ -19,7 +19,7 @@ class CommandTable {
 private:
     static CommandTable *instance;
     map<string, Expression*> commandTable;
-    vector<Expression*> allExp;
+    vector<CommandExpression*> allExp;
 
 public:
     CommandTable();

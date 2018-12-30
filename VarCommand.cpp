@@ -72,7 +72,7 @@ int VarCommand::setParameters(vector<string> data, int index) {
         }
         //if it can be an expression
         this->valStr = data[index + 2];
-       // this->valStr = putSpaces(this->valStr);
+        // this->valStr = putSpaces(this->valStr);
 
         string val = putSpaces(data[index + 2]);
         Expression *valExp = expressionDetect->evaluate(val);
@@ -96,10 +96,12 @@ void VarCommand::doCommand() {
         //check if the varName exist in the map 'var-path'
         if (symbolTab->isValExist(this->var)) {
             //need to send a mess to the server about the chaning
-            Command *equalsComm = new equalsCommand();
+            equalsCommand *equalsComm = new equalsCommand();
 
             this->isCommandExist = true;
             this->command = equalsComm;
+
+            this->commands.push_back(equalsComm);
 
             vector<string> params;
             params.push_back(this->var);
@@ -116,7 +118,10 @@ void VarCommand::doCommand() {
 }
 
 VarCommand::~VarCommand() {
-    if (this->isCommandExist) {
-        delete (this->command);
+    if (this->commands.empty() == false) {
+        vector<equalsCommand *>::iterator it;
+        for (it = this->commands.begin(); it != this->commands.end(); ++it) {
+            delete (*it);
+        }
     }
 }

@@ -39,6 +39,9 @@ void *ServerSocket::openSocket(void *arg) {
            // exit(1);
         }
 
+        //cout<<"buffer"<<endl;
+        //cout<<buffer<<endl;
+        //cout<<"END "<<endl;
        // buff = buff.substr(1,buff.size()-2); //take out the quats
         // split each line it get from the file to list of separate strings
         vector<string> info;
@@ -63,11 +66,12 @@ void *ServerSocket::openSocket(void *arg) {
         for (int i = 0; i < paths.size(); ++i) {
             table->addValueByPathIndex(i, stod(info[i]));
         }
-        table->setValuesInSymbolTable();
+       // table->setValuesInSymbolTable();
 
         buff += leftOvers;
         leftOvers = "";
 
+        sleep(10/1000);
     }
 
     //todo - maybe close thread ?

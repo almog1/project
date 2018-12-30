@@ -15,9 +15,11 @@ class Var : public Expression {
 private:
     string name;
     string path;
-    double value;
+  //  double value;
 public:
-    Var(const string &name, const string &path, double value);
+//    Var(const string &name, const string &path, double value);
+
+    Var(const string &name, const string &path);
 
     explicit Var(const string &name);
 
@@ -25,13 +27,13 @@ public:
 
     void setPath(const string &path);
 
-    void setValue(double value);
+//    void setValue(double value);
 
     const string &getName() const;
 
     const string &getPath() const;
 
-    double getValue() const;
+//    double getValue() const;
 
     double calculate() override;
 

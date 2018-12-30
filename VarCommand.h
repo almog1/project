@@ -9,16 +9,18 @@
 #include "ExpressionHeaders.h"
 #include "ExpressionDetect.h"
 #include "PlacementCommand.h"
+#include "equalsCommand.h"
 
 class VarCommand : public Command {
     bool isBind;
     string var;
-    Expression* val;
+    Expression *val;
     string path;
     string valStr;
 
     bool isCommandExist;
-    Command* command;
+    Command *command;
+    vector<equalsCommand *> commands;
 public:
     VarCommand();
 

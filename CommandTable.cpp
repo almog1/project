@@ -8,6 +8,7 @@
 #include "PrintCommand.h"
 #include "SleepCommand.h"
 #include "IfCommand.h"
+#include "ExitCommand.h"
 
 #define OPEN_DATA_SERVER "openDataServer"
 #define CONNECT "connect"
@@ -27,19 +28,21 @@ CommandTable *CommandTable::instance = nullptr;
 CommandTable::CommandTable() {
     this->commandTable.insert(
             pair<string, Expression *>(OPEN_DATA_SERVER, new CommandExpression(new OpenDataServer())));
-    this->allExp.push_back(this->commandTable[OPEN_DATA_SERVER]);
+    this->allExp.push_back(dynamic_cast<CommandExpression *>(this->commandTable[OPEN_DATA_SERVER]));
     this->commandTable.insert(pair<string, Expression *>(CONNECT, new CommandExpression(new ConnectCommand())));
-    this->allExp.push_back(this->commandTable[CONNECT]);
+    this->allExp.push_back(dynamic_cast<CommandExpression *>(this->commandTable[CONNECT]));
     this->commandTable.insert(pair<string, Expression *>(VAR, new CommandExpression(new VarCommand())));
-    this->allExp.push_back(this->commandTable[VAR]);
+    this->allExp.push_back(dynamic_cast<CommandExpression *>(this->commandTable[VAR]));
     this->commandTable.insert(pair<string, Expression *>(WHILE, new CommandExpression(new LoopCommand())));
-    this->allExp.push_back(this->commandTable[WHILE]);
+    this->allExp.push_back(dynamic_cast<CommandExpression *>(this->commandTable[WHILE]));
     this->commandTable.insert(pair<string, Expression *>(PRINT, new CommandExpression(new PrintCommand())));
-    this->allExp.push_back(this->commandTable[PRINT]);
+    this->allExp.push_back(dynamic_cast<CommandExpression *>(this->commandTable[PRINT]));
     this->commandTable.insert(pair<string, Expression *>(SLEEP, new CommandExpression(new SleepCommand())));
-    this->allExp.push_back(this->commandTable[SLEEP]);
+    this->allExp.push_back(dynamic_cast<CommandExpression *>(this->commandTable[SLEEP]));
     this->commandTable.insert(pair<string, Expression *>(IF, new CommandExpression(new IfCommand())));
-    this->allExp.push_back(this->commandTable[IF]);
+    this->allExp.push_back(dynamic_cast<CommandExpression *>(this->commandTable[IF]));
+    this->commandTable.insert(pair<string, Expression *>(EXIT, new CommandExpression(new ExitCommand())));
+    this->allExp.push_back(dynamic_cast<CommandExpression *>(this->commandTable[EXIT]));
 }
 
 /**
@@ -47,15 +50,18 @@ CommandTable::CommandTable() {
  */
 void CommandTable::setMapValues() {
     this->commandTable[VAR] = new CommandExpression(new VarCommand());
-    this->allExp.push_back(this->commandTable[VAR]);
+
+    this->allExp.push_back(dynamic_cast<CommandExpression *>(this->commandTable[VAR]));
     this->commandTable[IF] = new CommandExpression(new IfCommand());
-    this->allExp.push_back(this->commandTable[IF]);
+    this->allExp.push_back(dynamic_cast<CommandExpression *>(this->commandTable[IF]));
     this->commandTable[WHILE] = new CommandExpression(new LoopCommand());
-    this->allExp.push_back(this->commandTable[WHILE]);
+    this->allExp.push_back(dynamic_cast<CommandExpression *>(this->commandTable[WHILE]));
     this->commandTable[PRINT] = new CommandExpression(new PrintCommand());
-    this->allExp.push_back(this->commandTable[PRINT]);
+    this->allExp.push_back(dynamic_cast<CommandExpression *>(this->commandTable[PRINT]));
     this->commandTable[SLEEP] = new CommandExpression(new SleepCommand());
-    this->allExp.push_back(this->commandTable[SLEEP]);
+    this->allExp.push_back(dynamic_cast<CommandExpression *>(this->commandTable[SLEEP]));
+    this->commandTable.insert(pair<string, Expression *>(EXIT, new CommandExpression(new ExitCommand())));
+    this->allExp.push_back(dynamic_cast<CommandExpression *>(this->commandTable[EXIT]));
 }
 
 /**
@@ -92,12 +98,13 @@ CommandTable *CommandTable::getInstance() {
 
 CommandTable::~CommandTable() {
     //delte all expressions
-    if (this->allExp.empty() == false) {
-        for (auto &&exp : this->allExp) {
-            delete exp;
+    if (!this->allExp.empty()) {
+        vector<CommandExpression *>::iterator it;
+        for (it = this->allExp.begin(); it != this->allExp.end(); ++it) {
+            delete (*it);
         }
     }
-    delete instance;
+   // delete instance;
 }
 
 /**

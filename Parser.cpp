@@ -24,7 +24,9 @@ Parser::Parser() {
 }
 
 Parser::~Parser() {
-    delete &this->commandTable;
+    CommandTable *commandTab = CommandTable::getInstance();
+    delete commandTab;
+    // delete &this->commandTable;
 }
 
 void Parser::parser(vector<string> data) {
@@ -40,7 +42,6 @@ void Parser::parser(vector<string> data) {
     while (index < data.size()) {
         //vector not empty
         if (data.empty() == false) {
-            //todo - downcast!!!!!
             map<string, Expression *>::iterator it;
 
             SymbolTable *ins = SymbolTable::getInstance();

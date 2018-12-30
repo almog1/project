@@ -14,6 +14,7 @@ using namespace std;
 ifstream file;
 
 int main(int argc, char* argv[]) {
+
     string fileName = "";
     if(argc >= 1){
         fileName = argv[1];
@@ -22,6 +23,6 @@ int main(int argc, char* argv[]) {
     vector<string> data = Lexer(fileName);
     Parser* parserRun = new Parser();
     parserRun->parser(data);
-    delete parserRun;
-    pthread_exit(NULL);
+  //  delete parserRun;
+    //pthread_exit(NULL);
 }

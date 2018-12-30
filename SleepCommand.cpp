@@ -2,6 +2,7 @@
 // Created by chagit on 12/23/18.
 //
 
+#include <iostream>
 #include "SleepCommand.h"
 #include "SymbolTable.h"
 
@@ -24,7 +25,7 @@ int SleepCommand::setParameters(vector<string> data, int index) {
     //put spaces in the sleep string
     string sleepStr = putSpaces(data[index + 1]);
     Expression *sleepExp = expressionDetect->evaluate(sleepStr);
-    this->sleepTime = (sleepExp->calculate() / 1000);
+    this->sleepTime = (sleepExp->calculate())*1000;
 
     //read the command name and the var of it - num of time for sleeping
     return 2;
@@ -34,6 +35,8 @@ int SleepCommand::setParameters(vector<string> data, int index) {
  * runs the sleep command
  */
 void SleepCommand::doCommand() {
+    //cout << "Sleep: " << pthread_self() << endl;
+    //cout << "time: " << this->sleepTime << endl;
     //sleep the program according to the variable that we get
-    sleep(this->sleepTime);
+    usleep(this->sleepTime);
 }
